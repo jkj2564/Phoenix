@@ -1,5 +1,7 @@
 package com.spring.phoenix.service.tour.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,10 @@ public class TourServiceImpl implements TourService {
 		tourRepository.save(tour);
 		tourRepository.flush();
 		return tour.getTourSeq();
+	}
+	
+	@Override
+	public List<Tour> tourInfo() {
+		return tourRepository.findAll();
 	}
 }

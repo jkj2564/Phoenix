@@ -27,26 +27,26 @@
 	            </div>
 	            <div class="carousel-inner">
 	                <div class="carousel-item active">
-	                    <img src="@{/images/theme1_couple.jpg}" class="d-block w-100 t-s" alt="테마1 연인" onclick="sc('1')">
+	                    <img th:src="@{/images/theme1_couple.jpg}" class="d-block w-100 t-s" alt="테마1 연인" onclick="sc('1')">
 	                    <div class="carousel-caption d-none d-md-block th2_text">
 	                        <h5>친구 또는 연인과 함께하는 여행</h5>
 	                        <p>친구 또는 연인과 함께하는 테마 패키지 여행을 떠나보자!</p>
 	                    </div>
 	                  </div>
 	                  <div class="carousel-item">
-	                    <img src="@{/images/theme2_family.jpg}" class="d-block w-100 t-s" alt="테마2 가족" onclick="sc('2')">
+	                    <img th:src="@{/images/theme2_family.jpg}" class="d-block w-100 t-s" alt="테마2 가족" onclick="sc('2')">
 	                    <div class="carousel-caption d-none d-md-block th1_text">
 	                      <h5>가족과 함께하는 여행</h5>
 	                      <p>어르신을 모시고 가는 테마와 아이와 같이가는 테마 패키지 여행을 선택해보자!</p>
 	                    </div>
 	                  </div>
 	                  <div class="carousel-item">
-	                    <img src="@{/images/theme3_main.jpg}" class="d-block w-100 t-s" alt="테마3 강아지" onclick="sc('3')">
+	                    <img th:src="@{/images/theme3_main.jpg}" class="d-block w-100 t-s" alt="테마3 강아지" onclick="sc('3')">
 	                    <div class="carousel-caption d-none d-md-block th3_text">
 	                      <h5>애완동물과 함께하는 여행</h5>
 	                      <p>애완동물과 함께 떠나는 패키지 여행으로 추억 쌓기!</p>
-	                    </div>
-	                  </div>
+	                	</div>
+	            	</div>
 	            </div>
 	            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
 	              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -73,55 +73,28 @@
 	            <div class="themeMainPic">
 	                <h2>친구 또는 연인과 함께하는 여행</h2>
 	                <div class="grid">
-	                    <div class="themeItem">
-	                        <a href="/tour/detail.do">
-	                            <img src="${pageContext.request.contextPath }/images/theme1-1_1.jpg" alt="테마1-1 대표사진">
-	                            <p class="textSmall">친구 패키지</p>
-	                            <p class="textBold">전주 #한옥마을 #베스트웨스턴 #1박 #한복체험 #온누리상품권</p>
-	                            <p class="textBolder">117,000 원 ~ </p>
+	                    <div class="themeItem" th:each="tour: ${tourList}" th:if="${tour.tourPackage eq '친구 패키지' || tour.tourPackage eq '연인 패키지'}">
+	                        <a>
+	                        	<input type="hidden" name="tourSeq" value="${tour.tourSeq }">
+		                        <img src="/upload/${img.mainImgName }" alt="대표사진">
+	                            <p class="textSmall" th:text="${tour.tourPackage }"></p>
+                            	<p class="textBold" th:text="${tour.tourTitle }"></p>
+                            	<p class="textBolder" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA') } + '원 ~'"></p>
 	                        </a>
 	                    </div>
-	                    <c:forEach var="tour" items="${tourList }">
-		                    <div class="themeItem">
-		                        <a href="/tour/detail.do?tourSeq=${tour.tourSeq }">
-		                        	<input type="hidden" name="tourSeq" value="${tour.tourSeq }">
-		                        	<c:forEach items="${tmiList }" var="img">
-			                            <img src="/upload/${img.mainImgName }" alt="테마1-1 대표사진">
-		                            </c:forEach>
-		                            <p class="textSmall">${tour.tourPackage }</p>
-	                            	<p class="textBold">${tour.tourTitle }</p>
-	                            	<p class="textBolder">${tour.tourPriceAdult } ~ </p>
-		                        </a>
-		                    </div>
-						</c:forEach>
 	                </div>
 	            </div>
 	            <hr class="t2-d">
 	            <div class="themeMainPic">
 	                <h2>가족과 함께하는 여행</h2>
 	                <div class="grid">
-	                    <div class="themeItem">
-	                        <a href="tour_info_detail_2-1.html">
-	                            <img src="${pageContext.request.contextPath }/images/theme2-1_1.png" alt="테마2-1 대표사진">
-	                            <p class="textSmall">가족(노인) 패키지</p>
-	                            <p class="textBold">영주 #2일 #한옥스테이 1박 #의관댁 별채 #막걸리빚기 2인 체험권 #온누리상품권</p>
-	                            <p class="textBolder">112,000 원 ~ </p>
-	                        </a>
-	                    </div>
-	                    <div class="themeItem">
-	                        <a href="tour_info_detail_2-2.html">
-	                            <img src="${pageContext.request.contextPath }/images/theme2-2_1.jpg" alt="테마2-2 대표사진">
-	                            <p class="textSmall">가족(노인) 패키지</p>
-	                            <p class="textBold">울릉도 #독도포함 #강릉쾌속선 #육로버스투어 #호텔급 #강릉항출발</p>
-	                            <p class="textBolder"> 360,000 원 ~ </p>
-	                        </a>
-	                    </div>
-	                    <div class="themeItem">
-	                        <a onclick="alert_ing()">
-	                            <img src="${pageContext.request.contextPath }/images/theme2-3_1.jpg" alt="테마2-4 대표사진">
-	                            <p class="textSmall">가족(아이) 패키지</p>
-	                            <p class="textBold">춘천 #레고랜드 #이색체험 #가족여행 #우리 아이와</p>
-	                            <p class="textBolder">40,000 원 ~ </p>
+	                    <div class="themeItem" th:each="tour: ${tourList}" th:if="${tour.tourPackage eq '가족(노인) 패키지' || tour.tourPackage eq '가족(아이) 패키지'}">
+	                        <a>
+	                        	<input type="hidden" name="tourSeq" value="${tour.tourSeq }">
+		                        <img src="/upload/${img.mainImgName }" alt="대표사진">
+	                            <p class="textSmall" th:text="${tour.tourPackage }"></p>
+                            	<p class="textBold" th:text="${tour.tourTitle }"></p>
+                            	<p class="textBolder" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA') } + '원 ~'"></p>
 	                        </a>
 	                    </div>
 	                </div>
@@ -130,20 +103,13 @@
 	            <div class="themeMainPic t3-d">
 	                <h2>애완동물과 함께하는 여행</h2>
 					<div class="grid">
-	                    <div class="themeItem">
-	                        <a href="tour_info_detail_3-1.html">
-	                            <img src="${pageContext.request.contextPath }/images/theme3-1_1.jpg" alt="테마3-1 대표사진">
-	                            <p class="textSmall">애완동물 패키지</p>
-	                            <p class="textBold"> 울주 #반려견동반 #1박 2일 #독채펜션 #영남알프스 #힐링여행</p>
-	                            <p class="textBolder">141,500 원 ~ </p>
-	                        </a>
-	                    </div>
-	                    <div class="themeItem">
-	                        <a href="tour_info_detail_3-2.html">
-	                            <img src="${pageContext.request.contextPath }/images/theme3-2_1.jpg" alt="테마3-2 대표사진">
-	                            <p class="textSmall">애완동물 패키지</p>
-	                            <p class="textBold"> 부산 #송도 #송도케이블카 #오륙도스카이워크 #이기대두레길 #해운대 #용궁사</p>
-	                            <p class="textBolder">290,000 원 ~ </p>
+	                    <div class="themeItem" th:each="tour: ${tourList}" th:if="${tour.tourPackage eq '애완동물 패키지'}">
+	                        <a>
+	                        	<input type="hidden" name="tourSeq" value="${tour.tourSeq }">
+		                        <img src="/upload/${img.mainImgName }" alt="대표사진">
+	                            <p class="textSmall" th:text="${tour.tourPackage }"></p>
+                            	<p class="textBold" th:text="${tour.tourTitle }"></p>
+                            	<p class="textBolder" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA') } + '원 ~'"></p>
 	                        </a>
 	                    </div>
 	                </div>
