@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+		<title>index</title>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/join_style.css}">
+		</th:block>
+		<!--<th:block layout:fragment="script">
+			<script>
+				$(function() {
+					alert("hello spring boot");
+				});
+			</script>
+		</th:block>-->
+	</head>
+	<body>
+		<div layout:fragment="content" class="container contetnt">
+	        <p class="TextTitle">회원가입</p>
+	        <hr/>
+	        <form id="joinForm" action="/user/join.do">
+	            <table class ="join-table">
+	                <tr>
+	                    <th class ="th">아이디</th>
+	                    <td class ="td">
+	                    	<input class="userId" type="text" id="input" name="userId" required autofocus placeholder="아이디" style="width: 250px;">
+	                    	<button type="button" id="btnIdCheck" style="width: 70px; height: 30px; border-radius: 5px; border: none; background: #E0E0E0; margin-left: 5px; font-size: 14px;">중복확인</button>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th class ="th">비밀번호</th>
+	                    <td class ="td">
+	                    	<input class="userPw" type="password" id="input" name="userPw" required placeholder="비밀번호">
+	                    	<p id="pwValidation" style="color: red; font-size: 14px; margin-left: 14px;">비밀번호는 영문자, 숫자, 특수문자 조합의 9자리 이상으로 설정해주세요.</p>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th class ="th">비밀번호 확인</th>
+	                    <td class ="td">
+	                    	<input class="userPwCheck" type="password" id="input" name="userPwCheck" required placeholder="비밀번호 확인">
+	                    	<p id="pwCheckResult" style="font-size: 14px; margin-left: 14px;"></p>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th class ="th">이름</th>
+	                    <td class ="td">
+	                    	<input class="userNm" type="text" id="input" name="userNm" required placeholder="이름">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th class ="th">생년월일</th>
+	                    <td class ="td">
+	                    	<input class="userBirth" type="date" id="input" name="userBirth">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th class ="th">성별</th>
+	                    <td class ="td">
+	                        <label>
+	                            <input type="radio" name="userGender" id="span" value="M">
+	                            <span>남자</span>
+	                        </label>
+	                        <label>
+	                            <input type="radio" name="userGender" id="span" value="F">
+	                            <span>여자</span>
+	                        </label>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th class ="th">휴대전화</th>
+	                    <td class ="td">
+	                    	<input class="userTel" type="tel" id="input" name="userTel" required placeholder=" 000-0000-0000">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th class ="th">이메일</th>
+	                    <td class ="td">
+	                    	<input class="userMail" type="email" id="input" name="userMail" placeholder=" 이메일">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th class ="th">관심분야 1</th>
+	                    <td class ="td">
+	                        <label>
+	                            <input type="radio" name="need1" value="family" checked>
+	                            <span >가족과 함께</span>
+	                        </label>
+	                        <label>
+	                            <input type="radio" name="need1" value="couple">
+	                            <span >연인과 함께</span>
+	                        </label>
+	                        <label>
+	                            <input type="radio" name="need1" value="pet">
+	                            <span>반려견과 함께</span>
+	                        </label>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th class ="th">관심분야 2</th>
+	                    <td class ="td">
+	                        <label>
+	                            <input type="radio" name="need2" value="family">
+	                            <span >가족과 함께</span>
+	                        </label>
+	                        <label>
+	                            <input type="radio" name="need2" value="couple" checked>
+	                            <span >연인과 함께</span>
+	                        </label>
+	                        <label>
+	                            <input type="radio" name="need2" value="pet">
+	                            <span>반려견과 함께</span>
+	                        </label>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th class ="th">관심분야 3</th>
+	                    <td class ="td">
+	                        <label>
+	                            <input type="radio" name="need3" value="family">
+	                            <span >가족과 함께</span>
+	                        </label>
+	                        <label>
+	                            <input type="radio" name="need3" value="couple">
+	                            <span >연인과 함께</span>
+	                        </label>
+	                        <label>
+	                            <input type="radio" name="need3" value="pet" checked>
+	                            <span>반려견과 함께</span>
+	                        </label>
+	                    </td>
+	                </tr>
+	            </table>
+	            <button type="submit" id="btn5">가입완료</button>
+	        </form>
+	        <br/>
+	        <br/>
+		</div>
+	</body>
+</html>

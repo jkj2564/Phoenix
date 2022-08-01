@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+.join-table label {
+	margin-left: 10px;
+}
+
+.TextTitle {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+#pwValidation{  
+    margin: 0;
+}
+
+#pwCheckResult {
+	margin: 0;
+}
+
+#input {
+    width: 330px;
+    border: 1px solid #BDBDBD;
+    padding: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+input:checked+span {
+    color: #e74c3c;
+}
+
+.join-table {
+    width: 100%;
+    height: max-content;
+    border-collapse: collapse;
+    border-top: 2px solid #BDBDBD;
+    border-bottom: 2px solid #BDBDBD;
+    
+}
+
+.td {
+    margin-left: 100px;
+    border-top: 1px solid #BDBDBD;
+    padding: 10px;
+    width: 80%;
+}
+
+.join-table .th {
+    background-color: #EEEEEE;
+    border-top: 1px solid #BDBDBD;
+    padding: 15px 10px;
+    text-align: center;
+    width: 20%;
+}
+
+#btn5 {
+    margin-left: 45%;
+    width: 120px;
+    height: 40px;
+    background-color: #e74c3c;
+    font-size: 16px;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 25px;
+    vertical-align: left;
+    margin-top: 40px;
+}
+
+#need1 #need2 #need3 {
+    margin-top: 13px;
+    margin-bottom: 11px;
+}
+#span{
+    margin: 4px 10px;
+}
+#signup{
+    font-size: 36px;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+		<title>index</title>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/insertTour_style.css}">
+		</th:block>
+	</head>
+	<body>
+		<div layout:fragment="content" class="container">
+	        <p class="TextTitle">여행지 등록</p>
+	        <hr>
+	        <form action="/tour/insertTour" method="post" enctype="multipart/form-data">
+	            <table class="table">
+	                <tr>
+	                    <th style="background: #EEEEEE;">패키지</th>
+	                    <td>
+	                        <select id="tourPackage" name="tourPackage">
+	                            <option value="친구 패키지">친구 패키지</option>
+	                            <option value="연인 패키지">연인 패키지</option>
+	                            <option value="가족(노인) 패키지">가족(노인) 패키지</option>
+	                            <option value="가족(아이) 패키지">가족(아이) 패키지</option>
+	                            <option value="애완동물 패키지">애완동물 패키지</option>
+	                        </select>
+	                    </td>
+	                </tr>
+	                <tr>
+	                	<th style="background: #EEEEEE;">대표 사진</th>
+	                	<td>
+	                		<input type="file" name="mainImg" multiple="multiple">
+	                	</td>
+	                </tr>
+	                <tr>
+	                    <th style="background: #EEEEEE;">여행 제목</th>
+	                    <td><textarea name="tourTitle" id="" rows="1" required></textarea></td>
+	                </tr>
+	                <tr>
+	                    <th style="background: #EEEEEE;">여행 설명</th>
+	                    <td><textarea name="tourContent" id="" rows="1" required></textarea></td>
+	                </tr>
+	                <tr>
+	                	<th style="background: #EEEEEE;">여행 일정</th>
+	                	<td><input type="text" name="tourNight" id="night" required>박 &nbsp;&nbsp;<input type="text" name="tourDay" id="day" required>일</td>
+	                </tr>
+					<tr>
+	                    <th rowspan="3" style="background: #EEEEEE;">여행 가격</th>
+	                        <td>
+	                            성인 : 
+	                            <input type="text" name="tourPriceAdult" id="priceAdult" required>
+	                            원
+	                        </td>
+	                </tr>
+	                <tr>
+	                        <td>
+	                            아동 : 
+	                            <input type="text" name="tourPriceChild" id="priceChid" required>
+	                            원
+	                        </td>
+	                </tr>
+	                <tr>
+	                        <td>
+	                            유아 : 
+	                            <input type="text" name="tourPriceBaby" id="priceBaby" required>
+	                            원
+	                        </td>
+	                </tr>
+	                <tr>
+	                    <th rowspan="2" style="background: #EEEEEE;">상품정보</th>
+	                    <td>
+	                        <input type="file">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>
+	                        <textarea name="tourInfo" id=""></textarea>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th rowspan="2" style="background: #EEEEEE;">여행일정표</th>
+	                    <td>
+	                        <input type="file">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>
+	                        <textarea name="tourPlan" id=""></textarea>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th rowspan="2" style="background: #EEEEEE;">관광지</th>
+	                    <td>
+	                        <input type="file">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>
+	                        <textarea name="tourDestination" id=""></textarea>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th rowspan="2" style="background: #EEEEEE;">호텔</th>
+	                    <td>
+	                        <input type="file">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>
+	                        <textarea name="tourHotel" id=""></textarea>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th rowspan="2" style="background: #EEEEEE;">참고사항</th>
+	                    <td>
+	                        <input type="file">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>
+	                        <textarea name="tourNotice" id=""></textarea>
+	                    </td>
+	                </tr>
+	            </table>
+	            <button type="submit" class="button">등록하기</button>
+	        </form>
+		</div>
+	</body>
+</html>

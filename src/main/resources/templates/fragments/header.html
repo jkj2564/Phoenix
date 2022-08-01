@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org">
+	<head>
+	  	<meta charset="UTF-8">
+	  	<title>header</title>
+	</head>
+	<body>
+	  	<header th:fragment="header">
+			<div class="container topMenu">
+	            <ul class="topNav">
+	                <li>
+	                    <a href="/user/login">로그인</a>
+	                </li>
+	                <li>
+	                    <a href="/user/join">회원가입</a>
+	                </li>
+	                <li>
+	                    <a href="">고객센터</a>
+	                </li>
+	            </ul>
+	        </div>
+	        <!--로고 부분-->
+	        <div class="container midMenu">
+	            <div class="fl">
+	                <a th:href="@{/}">
+	                        <div class="logo"></div>
+	                </a>
+	                <div class="search">
+	                    <form class="d-flex">
+	                        <input type="text" class="form-control me-2" placeholder="검색어를 입력해 주세요." aria-label="Search"> 
+	                        <a href="">
+	                            <img class="search_icon" src="images/ico-search.png" alt="검색">
+	                        </a>
+	                    </form>
+	                </div>
+	            </div>
+	            <!--메뉴(네브바) 부분-->
+	            <div class="fr">
+	                <ul class=" me-auto">
+	                    <li>
+	                        <a href="">
+	                            <img src="images/mypage_icon.png" alt="마이페이지">
+	                            <br>마이페이지
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="">
+	                            <img src="images/reservation_icon.png" alt="예약내역">
+	                            <br>예약내역
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="">
+	                            <img src="images/jjim_icon.png" alt="찜">
+	                            <br>찜
+	                        </a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>        
+	        <div class="navbar navbar-dark navbar-expand-md">
+	            <div class="container">          
+	                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content">
+	                    <span class="navbar-toggler-icon"></span>
+	                </button>
+	                <div class="collapse navbar-collapse" id="navbar-content">
+	                    <ul class="navbar-nav me-auto">
+	                        <li class="nav-item dropdown navfont">
+	                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">전체메뉴</a>
+	                            <div class="dropdown-menu">
+	                                <a href="/tour/tourInfo" class="dropdown-item">여행정보</a>
+	                                <div class="dropdown-divider"></div>
+	                                <a href="" class="dropdown-item">여행리뷰</a>
+	                                <div class="dropdown-divider"></div>
+	                                <a href="" class="dropdown-item">이벤트</a>
+	                                <div class="dropdown-divider"></div>
+	                                <a href="" class="dropdown-item">공지사항</a>
+	                            </div>
+	                        </li>
+	                        <li class="nav-item navfont">
+	                            <a href="/tour/tourInfo" class="nav-link">여행정보</a>
+	                        </li>
+	                        <li class="nav-item navfont">
+	                            <a href="" class="nav-link">여행리뷰</a>
+	                        </li>
+	                        <li class="nav-item navfont">
+	                            <a href="" class="nav-link">이벤트</a>
+	                        </li>
+	                        <li class="nav-item navfont">
+	                            <a href="" class="nav-link">공지사항</a>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+		</header>
+	</body>
+</html>

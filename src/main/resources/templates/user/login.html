@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+		<title>index</title>
+		<!--<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/login_style.css}">
+		</th:block>
+		<th:block layout:fragment="script">
+			<script>
+				$(function() {
+					alert("hello spring boot");
+				});
+			</script>
+		</th:block>-->
+	</head>
+	<body>
+		<div layout:fragment="content" class="form-wrapper">
+            <form class="login-form">
+                <p class="TextTitle">로그인</p>
+                <div class="id-input">
+                    <input class="required" type="text" name="userId" id="userId" placeholder="아이디" size="20" maxlength="20" required>
+                </div>
+                <div class="pw-input">
+                    <input class="required" type="password" name="userPw" id="userPw" placeholder="비밀번호" size="20" maxlength="20" required>
+                </div>
+                <div class="form_holder check">
+                    <input type="checkbox" id="chk_id"><label for="">아이디저장</label>
+                </div>
+                <div class="form_holder check">
+                    <input type="checkbox"><label for="">비밀번호저장</label>
+                </div>
+                <div class="login-submit" style="text-align: center;">
+                    <button type="button" id="btnLogin" style="background: none; border: none; color: white;">로그인</button>
+                </div>
+                <hr>
+                <div class="btn_wrap login_sns" style="text-align: center;">
+                    <a href="https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com">
+                        <img src="${pageContext.request.contextPath }/images/naver_login.png" alt="네이버 로그인" width="30" height="30">
+                    </a>
+                    <a href="#none" class="sns_f">
+                        <img src="${pageContext.request.contextPath }/images/fb_login.png" alt="페이스북 로그인" width="30" height="30">
+                    </a>
+                    <a href="#none" class="sns_k">
+                        <img src="${pageContext.request.contextPath }/images/kakao_login.png" alt="구글 로그인" width="30" height="30">
+                    </a>
+                    <a href="#none" class="sns_g">
+                        <img src="${pageContext.request.contextPath }/images/google_login.png" alt="구글 로그인" width="30" height="30">
+                    </a>
+                        
+                </div>        
+                <div class="login-btn-wrap">
+                    <a href="#">아이디 찾기</a>
+                    <a href="#">비밀번호 찾기</a>
+                </div>    
+                <div class="register-submit" style="text-align: center;">
+                    <a href="/user/join.do" type="button" id="register" style="background: none; border: none; color: black;">회원가입</a>
+                </div>
+                <div class="copywrite">
+                 	<br>
+                    All rights reserved <br>
+                    Copyright (2022) Phoenix Tour
+                </div>
+            </form>
+        </div>
+	</body>
+</html>

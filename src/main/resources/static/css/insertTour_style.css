@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+body{
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.container {
+    max-width: 1120px;
+    padding: 0 10px;
+}
+
+.TextTitle {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.table {
+    border-top: 2px solid #BDBDBD;
+    border-bottom: 2px solid #BDBDBD;
+    width: 100%;
+    height: max-content;
+    margin-top: 30px;
+}
+
+.table th {
+    background: #EEEEEE;
+    border-top: 1px solid #BDBDBD;
+    padding: 10px 10px;
+    text-align: center;
+    width: 20%;
+    margin: auto;
+    vertical-align: middle;	
+}
+
+.table td {
+    border-top: 1px solid #BDBDBD;
+    padding: 10px 10px;
+    width: 80%;
+}
+
+.button {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 25px;
+    background-color: #E0E0E0;
+    font-size: 18px;
+    width: 120px;
+    display: block;
+    margin: 30px auto;
+}
+
+input:focus, textarea:focus, select:focus { 
+	outline: none; 
+}
+
+#priceAdult, #priceChid, #priceBaby {
+	border: 1px solid #BDBDBD;
+	width: 30%;
+	margin: 0 5px;
+	text-align: right;
+}
+
+#night, #day {
+	border: 1px solid #BDBDBD;
+	width: 50px;
+	margin-right: 5px;
+	text-align: center;
+}
+
+#tourPackage {
+	width: 40%;
+	border: 1px solid #BDBDBD;
+}
+
+textarea {
+	border: 1px solid #BDBDBD;
+	width: 100%;
+}
+
+
+
+
+
