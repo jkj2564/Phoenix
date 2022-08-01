@@ -1,5 +1,9 @@
 package com.spring.phoenix.service.user;
 
-public interface UserService {
+import com.spring.phoenix.entitiy.User;
 
+public interface UserService {
+	void join(User user);
+	
+	User idCheck(String userId);
 }

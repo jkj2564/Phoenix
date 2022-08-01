@@ -38,7 +38,10 @@ public class TourServiceImpl implements TourService {
 	
 	@Override
 	public void insertTourFileList(List<TourFile> fileList) {
-		tourFileRepository.saveAll(fileList);
+		for(TourFile tourFile : fileList) {
+			tourFile.setFileSeq(tourFileRepository.selectNextFileSeqByBoardBoardSeq(tourFile.getTour().getTourSeq()));
+			tourFileRepository.save(tourFile);
+		}
 	}
 	
 	@Override

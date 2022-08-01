@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+		<title>index</title>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/reservation_style.css}">
+		</th:block>
+		<!--<th:block layout:fragment="script">
+			<script>
+				$(function() {
+					alert("hello spring boot");
+				});
+			</script>
+		</th:block>-->
+	</head>
+	<body>
+		<div layout:fragment="content" class="container contetnt">
+			<p class="TextTitle">예약하기</p>
+			<hr>
+			<!--상품 정보-->
+			<div>
+				<p class="div-top-margin TextSubTitle">상품 정보</p>
+				<table class="table-2 goods-info-table">
+					<tr>
+						<th>상품명</th>
+						<td>[${tour.tourPackage }] ${tour.tourTitle }</td>
+					</tr>
+					<tr>
+						<th>여행기간</th>
+						<td>2022.06.24 (금) ~ 2022.06.25 (토) (${tour.tourNight }박 ${tour.tourDay }일)</td>
+					</tr>
+					<tr>
+						<th>상품가격</th>
+						<td>상담 후 결제 (예약 신청 후 담당자와 상담을 통해 결제를 진행합니다.)</td>
+					</tr>
+				</table>
+			</div>
+			<!--예약자 정보-->
+			<form action="mypageFirst.html" onsubmit="submitAlert()">
+				<div class="div-top-margin">
+					<p class="TextSubTitle">예약자 정보</p>
+					<table class="table-2 client-info">
+						<tr>
+							<th>이름</th>
+							<td><input type="text" class="input-info" id="user_id_00"
+								placeholder="ex.홍길동" value="불사조" required></td>
+							<th>이메일</th>
+							<td><input type="email" class="input-info" id="user_email_00"
+								placeholder="ex.Hong@naver.com" value="phoenix@gmail.com"
+								required></td>
+						</tr>
+						<tr>
+							<th>생년월일</th>
+							<td><input type="text" class="input-info"
+								id="user_birthday_00" placeholder="ex.1991231" value="19990909" required></td>
+							<th>휴대폰 번호</th>
+							<td><input type="tel" class="input-info" id="user_tel_00"
+								placeholder="ex.010-1234-5678" value="010-1234-5678" required></td>
+						</tr>
+					</table>
+				</div>
+				<!--여행자 정보-->
+				<div class="div-top-margin">
+					<p class="TextSubTitle">여행자 정보</p>
+					<div class="sum-client">
+						<div class="sum">
+							<p class="TextMidTitle">성인</p>
+							<p>(만 14세 이상)</p>
+							<div class="TextSubTitle sum-button sum-button-media">
+								<button type="button" id="minus_adult">-</button>
+								<p class="sum-adult">1</p>
+								<button type="button" id="plus_adult">+</button>
+							</div>
+						</div>
+						<div class="sum">
+							<p class="TextMidTitle">아동</p>
+							<p>(만 2세 이상 만 14세 미만)</p>
+							<div class="TextSubTitle sum-button">
+								<button type="button" id="minus_child">-</button>
+								<p class="sum-child">0</p>
+								<button type="button" id="plus_child">+</button>
+							</div>
+						</div>
+						<div class="sum">
+							<p class="TextMidTitle">유아</p>
+							<p>(만 2세 미만)</p>
+							<div class="TextSubTitle sum-button sum-button-media">
+								<button type="button" id="minus_baby">-</button>
+								<p class="sum-baby">0</p>
+								<button type="button" id="plus_baby">+</button>
+							</div>
+						</div>
+					</div>
+	
+					<!-- 성인 1은 고정-->
+					<div class="adult-div">
+						<div class="adult-div-1">
+							<div class="flex-space-between">
+								<span class="TextMidTitle mid-top-margin input-adult">성인 1</span>
+								<div class="TextConent sameBtn">
+									<input type="checkbox" id="sameBtn">예약자와 동일
+								</div>
+							</div>
+							<table class="table-2 client-info">
+								<tr>
+									<th>이름</th>
+									<td><input type="text" class="input-info" id="user_id_01" placeholder="ex.홍길동" required /></td>
+								</tr>
+								<tr>
+									<th>생년월일</th>
+									<td><input type="text" class="input-info" id="user_birthday_01" placeholder="ex.1991231" required></td>
+	
+									<th>성별</th>
+									<td>
+										<div class="radio-info">
+											<input type="radio" name="gender_01" value="M" id="user_gender_01" required>남자&nbsp;&nbsp;&nbsp; 
+											<input type="radio" name="gender_01" value="F" id="user_gender_01">여자
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>이메일</th>
+									<td><input type="email" class="input-info" id="user_email_01" placeholder="ex.Hong@naver.com"></td>
+									<th>휴대폰 번호</th>
+									<td><input type="tel" class="input-info" id="user_tel_01" placeholder="ex.010-1234-5678"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!--추가될 아동 테이블-->
+					<div class="child-div"></div>
+				</div>
+				<!--결제금액-->
+				<div class="div-top-margin">
+					<p class="TextSubTitle">결제금액</p>
+					<div class="price-div">
+						<div class="price-div-top">
+							<table class="price-table">
+								<tr>
+									<th class="">성인</th>
+									<td class="price-adult price-table-price">${tour.tourPriceAdult }</td>
+									<td class="price-table-td">X</td>
+									<td class="price-adult-count-sum price-table-count-sum">1</td>
+									<td class="price-table-td">명</td>
+									<td class="price-adult-sum price-table-sum">${tour.tourPriceAdult }</td>
+									<td class="price-table-td">원</td>
+								</tr>
+								<tr>
+									<th class="">아동</th>
+									<td class="price-child price-table-price">${tour.tourPriceChild }</td>
+									<td class="price-table-td">X</td>
+									<td class="price-child-count-sum price-table-count-sum">0</td>
+									<td class="price-table-td">명</td>
+									<td class="price-child-sum price-table-sum">0</td>
+									<td class="price-table-td">원</td>
+								</tr>
+								<tr>
+									<th class="">유아</th>
+									<td class="price-baby price-table-price">${tour.tourPriceBaby }</td>
+									<td class="price-table-td">X</td>
+									<td class="price-baby-count-sum price-table-count-sum">0</td>
+									<td class="price-table-td">명</td>
+									<td class="price-baby-sum price-table-sum">0</td>
+									<td class="price-table-td">원</td>
+								</tr>
+							</table>
+						</div>
+						<div class="price-div-bottom">
+							<table class="price-sum-table">
+								<tr>
+									<th class="">총 결제금액</th>
+									<td class="price-sum"></td>
+									<td class="price-sum-table-td">원</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!--예약 버튼-->
+				<div class="top-bottom-margin flex-center">
+					<input type="submit" class="button" id="reservation" value="예약하기">
+					<button type="button" class="button" id="back" onClick="history.back()">취소</button>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

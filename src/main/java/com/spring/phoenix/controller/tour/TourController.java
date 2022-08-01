@@ -77,4 +77,12 @@ public class TourController {
 		
 		response.sendRedirect("/tour/tourInfo");
 	}
+	
+	@GetMapping("/reservation")
+	public ModelAndView reservation() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/tour/tourReservation.html");
+		
+		return mv;
+	}
 }

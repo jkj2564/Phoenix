@@ -6,10 +6,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>index</title>
-		<!--<th:block layout:fragment="css">
+		<th:block layout:fragment="css">
 			<link rel="stylesheet" th:href="@{/css/login_style.css}">
 		</th:block>
-		<th:block layout:fragment="script">
+		<!--<th:block layout:fragment="script">
 			<script>
 				$(function() {
 					alert("hello spring boot");
@@ -39,16 +39,16 @@
                 <hr>
                 <div class="btn_wrap login_sns" style="text-align: center;">
                     <a href="https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com">
-                        <img src="${pageContext.request.contextPath }/images/naver_login.png" alt="네이버 로그인" width="30" height="30">
+                        <img src="@{/images/naver_login.png}" alt="네이버 로그인" width="30" height="30">
                     </a>
                     <a href="#none" class="sns_f">
-                        <img src="${pageContext.request.contextPath }/images/fb_login.png" alt="페이스북 로그인" width="30" height="30">
+                        <img src="@{/images/fb_login.png}" alt="페이스북 로그인" width="30" height="30">
                     </a>
                     <a href="#none" class="sns_k">
-                        <img src="${pageContext.request.contextPath }/images/kakao_login.png" alt="구글 로그인" width="30" height="30">
+                        <img src="@{/images/kakao_login.png}" alt="구글 로그인" width="30" height="30">
                     </a>
                     <a href="#none" class="sns_g">
-                        <img src="${pageContext.request.contextPath }/images/google_login.png" alt="구글 로그인" width="30" height="30">
+                        <img src="@{/images/google_login.png}" alt="구글 로그인" width="30" height="30">
                     </a>
                         
                 </div>        

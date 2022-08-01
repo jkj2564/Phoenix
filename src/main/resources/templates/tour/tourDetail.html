@@ -9,19 +9,351 @@
 		<th:block layout:fragment="css">
 			<link rel="stylesheet" th:href="@{/css/detail_style.css}">
 		</th:block>
-		<!--
+		
 		<th:block layout:fragment="script">
 			<script>
-				$(function() {
-					alert("hello spring boot");
+				$(function(){
+            
+		            // 달력 생성
+		            var today = new Date();
+		            var date = new Date();
+		
+		            $("input[name=preMon]").click(function() { // 이전달
+		                $("#cal > tbody > td").remove();
+		                $("#cal > tbody > tr").remove();
+		                today = new Date ( today.getFullYear(), today.getMonth() - 1, today.getDate());
+		                buildCal();
+		            })
+		
+		            $("input[name=nextMon]").click(function() { // 다음달
+		                $("#cal > tbody > td").remove();
+		                $("#cal > tbody > tr").remove();
+		                today = new Date ( today.getFullYear(), today.getMonth() + 1, today.getDate());
+		                buildCal();
+		            })
+		
+		            function buildCal() {
+		                nowYear = today.getFullYear();
+		                nowMonth = today.getMonth();
+		                firstDate = new Date(nowYear, nowMonth, 1).getDate();
+		                firstDay = new Date(nowYear, nowMonth, 1).getDay();
+		                lastDate = new Date(nowYear, nowMonth + 1, 0).getDate();
+		
+		                if((nowYear % 4 == 0 && nowYear % 100 !== 0) || nowYear % 400 == 0) {
+		                    lastDate[1] = 29;
+		                }
+		
+		                $(".year_mon").text(nowYear + "년 " + (nowMonth + 1) + "월");
+		
+		                for(i = 0; i < firstDay; i++) {
+		                    $("#cal tbody:last").append("<td></td>");
+		                }
+		                
+		                for(i = 1; i <= lastDate; i++) {
+		                    plusDate = new Date(nowYear, nowMonth, i).getDay();
+		
+		                    if(plusDate == 0) {
+		                        $("#cal tbody:last").append("<tr></tr>");
+		                    }
+		                    $("#cal tbody:last").append("<td class='date'>"+ i +"</td>");
+		                }
+		
+		                if($("#cal > tbdoy > td").length % 7 != 0) {
+		                    for(i = 1; i <= $("#cal > tbody > td").length % 7; i++) {
+		                        $("#cal tbody:last").append("<td></td>");
+		                    }
+		                }
+		                
+		                $(".date").each(function(index) {
+		                    if(nowYear == date.getFullYear() && nowMonth == date.getMonth() && $(".date").eq(index).text() == date.getDate()) {
+		                        $(".date").eq(index).addClass("colToday");
+		                    }
+		
+		                    if(nowYear < date.getFullYear()) {
+		                        $(".date").eq(index).addClass("caldisable");
+		                    }
+		                    if(nowYear == date.getFullYear() && nowMonth < date.getMonth()) {
+		                        $(".date").eq(index).addClass("caldisable");
+		                    } else if( nowYear == date.getFullYear() && nowMonth == date.getMonth() && $(".date").eq(index).text() < date.getDate()) {
+		                        $(".date").eq(index).addClass("caldisable");
+		                    } 
+		                })
+		            }
+		
+		            buildCal();
+		
+		
+		            // 달력 부분            
+		            $(document).on("click", ".date", function() {
+		                $("#cal tbody td").not("td.caldisable").css("background", "#fff")
+		                                                       .css("color", "#000");
+		
+		                $(this).css("background", "#e74c3c")
+		                       .css("color", "#ffffff");
+		                
+		                var index = $("#cal tbody td").index(this);
+		     
+		                $("#cal tbody td").eq(index + 1).css("background", "#e74c3c")
+		                                     .css("color", "#ffffff");
+		                
+		
+		                $(".if").css("borderColor", "#e74c3c");
+		                $(".select-button").css("background", "#e74c3c")
+		                                   .text('선택됨')
+		                                   .css("color", "#ffffff");
+		
+		                $(".if-bottom").css("display" , "block");
+		
+		                var day = index % 7;
+		                var startdate = $(".year_mon").text() + " " + $(this).text() + "일 (" + $(".cal-top th").eq(day).text() + ")";
+		                $(".startDate").text(startdate);
+		
+		                var enddate = $(".year_mon").text() + " " + $("#cal tbody td").eq(index + 1).text() + "일 (" + $(".cal-top th").eq(day + 1).text() + ")";
+		                $(".endDate").text(enddate);
+		
+		                $(".btnR2").hide();
+		                $(".btnR1").show();
+		            });
+		
+		
+		            $(document).on("mouseover", ".date", function() {
+		                if(rgb2hex($(this).css("backgroundColor")) != "#e74c3c") 
+		                        $(this).css("background", "#F0C1B4");
+		            });
+		
+		            $(document).on("mouseout", ".date", function() {
+		                if(rgb2hex($(this).css("backgroundColor")) != "#e74c3c")
+		                        $(this).css("background", "#ffffff");
+		            });
+		            
+		            $(".btnR1").hide();
+		            $(".btnR2").show();
+		
+		            // 예약 버튼 관련
+		
+		
+		            
+		            $(".content-2").hide();
+		            $(".content-3").hide();
+		            $(".content-4").hide();
+		            $(".content-5").hide();
+		            $(".content-1").show();
+		            $("#submenu-1").css("background", "#e74c3c")
+		                           .css("borderColor", "#e74c3c")
+		                           .css("color", "#ffffff");
+		
+		            
+		            // 서브메뉴 클릭시 다른 div로 변경
+		            $("#submenu-1").click(function(){
+		                $(".content-2").hide();
+		                $(".content-3").hide();
+		                $(".content-4").hide();
+		                $(".content-5").hide();
+		                $(".content-1").show();
+		
+		                $(".menubtn button").css("background", "#F0C1B4")
+		                                    .css("borderColor", "#F0C1B4")
+		                                    .css("color", "#000000");
+		            
+		                $(this).css("background", "#e74c3c")
+		                            .css("borderColor", "#e74c3c")
+		                            .css("color", "#ffffff");
+		
+		            });
+		
+		            $("#submenu-2").click(function(){
+		                $(".content-1").hide();
+		                $(".content-3").hide();
+		                $(".content-4").hide();
+		                $(".content-5").hide();
+		                $(".content-2").show();
+		
+		                $(".menubtn button").css("background", "#F0C1B4")
+		                                    .css("border", "#F0C1B4")
+		                                    .css("color", "#000000");
+		            
+		                $(this).css("background", "#e74c3c")
+		                               .css("border", "#e74c3c")
+		                               .css("color", "#ffffff");
+		            });
+		
+		            $("#submenu-3").click(function(){
+		                $(".content-1").hide();
+		                $(".content-2").hide();
+		                $(".content-4").hide();
+		                $(".content-5").hide();
+		                $(".content-3").show();
+		                $(".menubtn button").css("background", "#F0C1B4")
+		                                    .css("border", "#F0C1B4")
+		                                    .css("color", "#000000");
+		            
+		                $(this).css("background", "#e74c3c")
+		                               .css("border", "#e74c3c")
+		                               .css("color", "#ffffff");
+		            });
+		
+		            $("#submenu-4").click(function(){
+		                $(".content-1").hide();
+		                $(".content-2").hide();
+		                $(".content-3").hide();
+		                $(".content-5").hide();
+		                $(".content-4").show();
+		                $(".menubtn button").css("background", "#F0C1B4")
+		                                    .css("border", "#F0C1B4")
+		                                    .css("color", "#000000");
+		            
+		                $(this).css("background", "#e74c3c")
+		                               .css("border", "#e74c3c")
+		                               .css("color", "#ffffff");
+		                
+		            });
+		
+		            $("#submenu-5").click(function(){
+		                $(".content-1").hide();
+		                $(".content-2").hide();
+		                $(".content-3").hide();
+		                $(".content-4").hide();
+		                $(".content-5").show();
+		                $(".menubtn button").css("background", "#F0C1B4")
+		                                    .css("border", "#F0C1B4")
+		                                    .css("color", "#000000");
+		            
+		                $(this).css("background", "#e74c3c")
+		                               .css("border", "#e74c3c")
+		                               .css("color", "#ffffff");
+		                
+		            });
+		
+		
+		            // 서브메뉴 여행 일정에서 버튼 클릭시 div 내렸다 올리기
+		            
+		            $("#scheduleBtn1").on("click", function(){
+		                $(".sdiv1").slideToggle(function() {});
+		
+		
+		            });
+		
+		            $("#scheduleBtn2").on("click", function(){
+		                $(".sdiv2").slideToggle( function() {
+		                    if($(".sdiv2").css("display") == "none")
+		                        $("#scheduleBtn2").css({"background":"url(./images/up.png)"});
+		                    else 
+		                        $("#scheduleBtn2").css({"background":"url(./images/down1.png)"});
+		                })
+		            });
+		
+		
+		
+		            function rgb2hex(rgb) {
+		                if ( rgb.search("rgb") == -1 ) {
+		                    return rgb;
+		                } else {
+		                    rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+))?\)$/);
+		                    function hex(x) {
+		                        return ("0" + parseInt(x).toString(16)).slice(-2);
+		                    }
+		                    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]); 
+		                }
+		            }
+		
+		
+		             // plus minus 버튼 클릭시 숫자 변경
+		            // 어른
+		            $("#plus_adult").on("click", function() {
+		                var num = parseInt($(".sum-adult").text());
+		                num++;
+		                $(".sum-adult").text(num);
+		                sumPrice(num);
+		            });
+		
+		            $("#minus_adult").on("click", function() {
+		                var num = parseInt($(".sum-adult").text());
+		                
+		                if(num > 1)
+		                    num--;
+		                
+		                $(".sum-adult").text(num);
+		                sumPrice(num);
+		            });
+		
+		            // 아동
+		            $("#plus_child").on("click", function() {
+		                var num = parseInt($(".sum-child").text());
+		                num++;
+		                $(".sum-child").text(num);
+		                sumPrice(num);
+		            });
+		
+		            $("#minus_child").on("click", function() {
+		                var num = parseInt($(".sum-child").text());
+		                
+		                if(num > 0)
+		                    num--;
+		                
+		                $(".sum-child").text(num);
+		                sumPrice(num);
+		            });
+		
+		            // 유아
+		            $("#plus_baby").on("click", function() {
+		                var num = parseInt($(".sum-baby").text());
+		                num++;
+		                $(".sum-baby").text(num);
+		                sumPrice(num);
+		            });
+		
+		            $("#minus_baby").on("click", function() {
+		                var num = parseInt($(".sum-baby").text());
+		                
+		                if(num > 0)
+		                    num--;
+		                
+		                $(".sum-baby").text(num);
+		                sumPrice(num);
+		            });
+		
+		
+		            
+		            // 모달창 상품 문의 등록
+		            $(".modalBtn2").on("click", function() {
+		                year = date.getFullYear();
+		                month = date.getMonth() + 1;
+		                day = date.getDate();
+		                if(month < 10)
+		                    month = "0" + month;
+		                td = year + "-" + month + "-" + day;
+		
+		                $(".inquiryTable tbody").prepend("<tr><td class='inTText'>답변대기</td><td>" + $("#message-text").val() + "</td><td class='inTText'>불사조</td><td class='inTText'>" + td +"</td></tr>");
+		
+		
+		            })
+		
+		
 				});
+		
+		        function sumPrice(num) {
+		            var sumPrice = (parseInt($.withoutCommas($("#adult-price").text())) * parseInt($(".sum-adult").text()))
+		                           + (parseInt($.withoutCommas($("#child-price").text())) * parseInt($(".sum-child").text())) 
+		                           + (parseInt($.withoutCommas($("#baby-price").text())) * parseInt($(".sum-baby").text()));
+		            $(".price-sum").text($.numberWithCommas(sumPrice)); 
+		        }
+		
+		        // 콤마찍기
+		        $.numberWithCommas = function (x) {
+		            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		        }
+		
+		        // 콤마빼기
+		        $.withoutCommas = function (x) {
+		            return x.toString().replace(",", '');
+		        }
 			</script>
-		</th:block>-->
+		</th:block>
 	</head>
 	<body>
 		<div layout:fragment="content" class="container content">
 	        <!--사진과 제목-->
-	        <div class="row align-items-start" style="margin-top: 30px;">
+	        <div class="row align-items-start">
 	        	<input type="hidden" name="tourSeq" value="${tour.tourSeq }">
 	            <!--사진 캐러셀-->
 	            <div class="col Title">
@@ -33,8 +365,11 @@
 	                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
 	                    </div>
 	                    <div class="carousel-inner">
-	                    <div class="carousel-item active">
-	                        <img src="${pageContext.request.contextPath }/images/theme1-1_1.jpg" class="d-block pic" alt="테마1-1 이미지1">
+	                    <div class="carousel-item active" th:each="fileList: ${fileList}" th:if="${fileList.fileSeq == 1}">
+	                        <img th:src="@{/upload/} + ${fileList.fileName}" class="d-block pic" alt="테마1-1 이미지1">
+	                    </div>
+	                    <div class="carousel-item" th:each="fileList: ${fileList}" th:if="${fileList.fileSeq != 1}">
+	                        <img th:src="@{/upload/} + ${fileList.fileName}" class="d-block pic" alt="테마1-1 이미지1">
 	                    </div>
 	                </div>
 	                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -96,7 +431,7 @@
 	                <div class="col if">
 	                    <div class="if-top">
 	                        <span class="select-button">미선택</span>
-	                        <p class="select-Title" th:text="'[' + ${tour.tourPackage } + ']' + ${tour.tourTitle }"></p>
+	                        <p class="select-Title" th:text="'[' + ${tour.tourPackage } + '] ' + ${tour.tourTitle }"></p>
 	                    </div>
 	                    <div class="if-bottom">
 	                        <p>예약현황 : 현재예약 0 명 / 최대예약 0명 (최소출발인원 0명)</p>
@@ -112,7 +447,7 @@
 	                <div class="personnelSelect personnel-div-top">
 	                    <div class="PS">
 	                        <p class="TextMidTitle">성인</p>
-	                        <p >(만 14세 이상)</p>
+	                        <p>(만 14세 이상)</p>
 	                        <p class="TextMidTitle" id="adult-price" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA')}"></p>
 	                        <div class="TextMidTitle sum-button sum-button-media">
 	                            <button type="button" id="minus_adult">-</button>
@@ -155,7 +490,7 @@
 	
 	            <!--예약 버튼-->
 	            <div class="rbtn reservation-div">
-	                <button type="button" class="btnR btnR1" data-bs-toggle="modal" data-bs-target="#r1" onclick="location.href='/tour/reservation.do'">예약</button>
+	                <button type="button" class="btnR btnR1" data-bs-toggle="modal" data-bs-target="#r1" onclick="location.href='/tour/reservation'">예약</button>
 	                <button type="button" class="btnR btnR2" data-bs-toggle="modal" data-bs-target="#r2">예약</button>
 	<!--                 <div class="modal fade modal-sm" id="r1">
 	                    <div class="modal-dialog modal-dialog-centered">

@@ -1,15 +1,6 @@
 @charset "UTF-8";
 
 /*1. 공통부분 작성*/
-html {
-    font-size : 100%;
-}
-
-body {
-    font-family: "나눔고딕", NanumGothic, "맑은고딕", MalagunGothic, "Apple SD Gothic Neo", sans-serif;
-    line-height:  1.7;
-    color: #ffffff;
-}
 
 a {
     text-decoration: none;
