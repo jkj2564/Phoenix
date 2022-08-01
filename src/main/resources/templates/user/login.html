@@ -19,7 +19,7 @@
 	</head>
 	<body>
 		<div layout:fragment="content" class="form-wrapper">
-            <form class="login-form">
+            <form class="login-form" action="/user/loginProc" method="post">
                 <p class="TextTitle">로그인</p>
                 <div class="id-input">
                     <input class="required" type="text" name="userId" id="userId" placeholder="아이디" size="20" maxlength="20" required>
@@ -34,21 +34,21 @@
                     <input type="checkbox"><label for="">비밀번호저장</label>
                 </div>
                 <div class="login-submit" style="text-align: center;">
-                    <button type="button" id="btnLogin" style="background: none; border: none; color: white;">로그인</button>
+                    <button type="submit" id="btnLogin" style="background: none; border: none; color: white;">로그인</button>
                 </div>
                 <hr>
                 <div class="btn_wrap login_sns" style="text-align: center;">
                     <a href="https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com">
-                        <img src="@{/images/naver_login.png}" alt="네이버 로그인" width="30" height="30">
+                        <img th:src="@{/images/naver_login.png}" alt="네이버 로그인" width="30" height="30">
                     </a>
                     <a href="#none" class="sns_f">
-                        <img src="@{/images/fb_login.png}" alt="페이스북 로그인" width="30" height="30">
+                        <img th:src="@{/images/fb_login.png}" alt="페이스북 로그인" width="30" height="30">
                     </a>
                     <a href="#none" class="sns_k">
-                        <img src="@{/images/kakao_login.png}" alt="구글 로그인" width="30" height="30">
+                        <img th:src="@{/images/kakao_login.png}" alt="구글 로그인" width="30" height="30">
                     </a>
                     <a href="#none" class="sns_g">
-                        <img src="@{/images/google_login.png}" alt="구글 로그인" width="30" height="30">
+                        <img th:src="@{/images/google_login.png}" alt="구글 로그인" width="30" height="30">
                     </a>
                         
                 </div>        
