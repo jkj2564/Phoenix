@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="T_TOUR")
+@Table(name="T_PH_TOUR")
 @Data
 @SequenceGenerator(name="T_TOUR_SEQ_GENERATOR",
 					sequenceName="T_TOUR_SEQ",
