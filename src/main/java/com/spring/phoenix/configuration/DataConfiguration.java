@@ -14,7 +14,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @PropertySource("classpath:/application.properties")
-public class DataConfiguration {
+public class DataConfiguration { 
 	@Bean
 	@ConfigurationProperties(prefix="spring.datasource.hikari")
 	public HikariConfig hikariConfig() {
