@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,17 +34,28 @@ public class TourController {
 		List<Tour> tourList = tourService.tourInfo();
 		mv.addObject("tourList", tourList);
 		
-		return mv;
-	}
-	
-	
-	@GetMapping("/tourDetail")
-	public ModelAndView tourDetail() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/tour/tourDetail.html");
+		List<TourFile> tourFileList = tourService.tourInfoFile();
+		mv.addObject("tourFileList", tourFileList);
 		
 		return mv;
 	}
+	
+	
+	@GetMapping("/tourDetail/{tourSeq}")
+	public ModelAndView tourDetail(@PathVariable int tourSeq) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/tour/tourDetail.html");
+		
+		Tour tour = tourService.tourDeatil(tourSeq);
+		List<TourFile> fileList = tourService.tourDatilFile(tourSeq);
+		
+		mv.addObject("tour", tour);
+		mv.addObject("fileList", fileList);
+		
+		return mv;
+	}
+	
+	
 	
 	@GetMapping("/insertTour")
 	public ModelAndView insertTourView() {

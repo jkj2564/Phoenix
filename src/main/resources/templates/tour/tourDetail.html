@@ -6,9 +6,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>index</title>
-		<!--<th:block layout:fragment="css">
-			<link rel="stylesheet" th:href="@{/css/test.css}">
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/detail_style.css}">
 		</th:block>
+		<!--
 		<th:block layout:fragment="script">
 			<script>
 				$(function() {
@@ -48,12 +49,12 @@
 	            </div>
 	             <!--테마 제목 및 내용-->
 	            <div class="col Title">
-	                <p class="textSmall">${tour.tourPackage }</p>
-	                <h3>${tour.tourTitle }</h3>
+	                <p class="textSmall" th:text="${tour.tourPackage }"></p>
+	                <h3 th:text="${tour.tourTitle }"></h3>
 	                <hr>
-					${tour.tourContent }
+					<p th:text="${tour.tourContent }"></p> 
 	                <hr>
-	                <a href="#" class="review">
+	                <a href="" class="review">
 	                    <span>리뷰</span>
 	                    <br>
 	                    <div class="reviewG">
@@ -95,11 +96,11 @@
 	                <div class="col if">
 	                    <div class="if-top">
 	                        <span class="select-button">미선택</span>
-	                        <p class="select-Title">[${tour.tourPackage }] ${tour.tourTitle }</p>
+	                        <p class="select-Title" th:text="'[' + ${tour.tourPackage } + ']' + ${tour.tourTitle }"></p>
 	                    </div>
 	                    <div class="if-bottom">
 	                        <p>예약현황 : 현재예약 0 명 / 최대예약 0명 (최소출발인원 0명)</p>
-	                        <p>일 정 : <span class="startDate"></span> ~ <span class="endDate"></span> / ${tour.tourNight }박 ${tour.tourDay }일</p>
+	                        <p>일 정 : <span class="startDate"></span> ~ <span class="endDate"></span> / <span th:text="${tour.tourNight } + '박 ' + ${tour.tourDay } + '일'"></span></p>
 	                        <p>여행도시 : 전라북도 전주시</p>
 	                    </div>
 	                </div>
@@ -112,7 +113,7 @@
 	                    <div class="PS">
 	                        <p class="TextMidTitle">성인</p>
 	                        <p >(만 14세 이상)</p>
-	                        <p class="TextMidTitle" id="adult-price">${tour.tourPriceAdult }</p>
+	                        <p class="TextMidTitle" id="adult-price" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA')}"></p>
 	                        <div class="TextMidTitle sum-button sum-button-media">
 	                            <button type="button" id="minus_adult">-</button>
 	                            <p class="sum-adult">1</p>
@@ -122,7 +123,7 @@
 	                    <div class="PS">
 	                        <p class="TextMidTitle">아동</p>
 	                        <p>(만 2세 이상 만 14세 미만)</p>
-	                        <p class="TextMidTitle" id="child-price">${tour.tourPriceChild }</p>
+	                        <p class="TextMidTitle" id="child-price" th:text="${#numbers.formatInteger(tour.tourPriceChild, 0, 'COMMA')}"></p>
 	                        <div class="TextMidTitle sum-button">
 	                            <button type="button" id="minus_child">-</button>
 	                            <p class="sum-child">0</p>
@@ -132,7 +133,7 @@
 	                    <div class="PS">
 	                            <p class="TextMidTitle">유아</p>
 	                            <p>(만 2세 미만)</p>
-	                            <p class="TextMidTitle" id="baby-price">${tour.tourPriceBaby }</p>
+	                            <p class="TextMidTitle" id="baby-price" th:text="${#numbers.formatInteger(tour.tourPriceBaby, 0, 'COMMA')}"></p>
 	                        <div class="TextMidTitle sum-button sum-button-media">
 	                            <button type="button" id="minus_baby">-</button>
 	                            <p class="sum-baby">0</p>
@@ -145,7 +146,7 @@
 	                    <table class="price-sum-table">
 	                        <tr>
 	                            <th class="">총 금액</th>
-	                            <td class="price-sum">${tour.tourPriceAdult }</td>
+	                            <td class="price-sum" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA')}"></td>
 	                            <td class="price-sum-table-td">원</td>
 	                        </tr>
 	                    </table>

@@ -74,12 +74,12 @@
 	                <h2>친구 또는 연인과 함께하는 여행</h2>
 	                <div class="grid">
 	                    <div class="themeItem" th:each="tour: ${tourList}" th:if="${tour.tourPackage eq '친구 패키지' || tour.tourPackage eq '연인 패키지'}">
-	                        <a>
+	                        <a th:href="@{/tour/tourDetail/{tourSeq} (tourSeq=${tour.tourSeq})}">
 	                        	<input type="hidden" name="tourSeq" value="${tour.tourSeq }">
-		                        <img src="/upload/${img.mainImgName }" alt="대표사진">
+		                        <img th:each="tourfile: ${tourFileList}" th:if="${tour.tourSeq} == ${tourfile.tour.tourSeq}" th:src="@{/upload/} + ${tourfile.fileName}" alt="대표사진">
 	                            <p class="textSmall" th:text="${tour.tourPackage }"></p>
                             	<p class="textBold" th:text="${tour.tourTitle }"></p>
-                            	<p class="textBolder" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA') } + '원 ~'"></p>
+                            	<p class="textBolder" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA')} + ' 원 ~'"></p>
 	                        </a>
 	                    </div>
 	                </div>
@@ -91,10 +91,10 @@
 	                    <div class="themeItem" th:each="tour: ${tourList}" th:if="${tour.tourPackage eq '가족(노인) 패키지' || tour.tourPackage eq '가족(아이) 패키지'}">
 	                        <a>
 	                        	<input type="hidden" name="tourSeq" value="${tour.tourSeq }">
-		                        <img src="/upload/${img.mainImgName }" alt="대표사진">
+		                        <img th:each="tourfile: ${tourFileList}" th:if="${tour.tourSeq} == ${tourfile.tour.tourSeq}" th:src="@{/upload/} + ${tourfile.fileName}" alt="대표사진">
 	                            <p class="textSmall" th:text="${tour.tourPackage }"></p>
                             	<p class="textBold" th:text="${tour.tourTitle }"></p>
-                            	<p class="textBolder" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA') } + '원 ~'"></p>
+                            	<p class="textBolder" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA') } + ' 원 ~'"></p>
 	                        </a>
 	                    </div>
 	                </div>
@@ -106,10 +106,10 @@
 	                    <div class="themeItem" th:each="tour: ${tourList}" th:if="${tour.tourPackage eq '애완동물 패키지'}">
 	                        <a>
 	                        	<input type="hidden" name="tourSeq" value="${tour.tourSeq }">
-		                        <img src="/upload/${img.mainImgName }" alt="대표사진">
+		                        <img th:each="tourfile: ${tourFileList}" th:if="${tour.tourSeq} == ${tourfile.tour.tourSeq}" th:src="@{/upload/} + ${tourfile.fileName}" alt="대표사진">
 	                            <p class="textSmall" th:text="${tour.tourPackage }"></p>
                             	<p class="textBold" th:text="${tour.tourTitle }"></p>
-                            	<p class="textBolder" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA') } + '원 ~'"></p>
+                            	<p class="textBolder" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA') } + ' 원 ~'"></p>
 	                        </a>
 	                    </div>
 	                </div>
