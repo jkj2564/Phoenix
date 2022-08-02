@@ -9,13 +9,255 @@
 		<th:block layout:fragment="css">
 			<link rel="stylesheet" th:href="@{/css/reservation_style.css}">
 		</th:block>
-		<!--<th:block layout:fragment="script">
+		<th:block layout:fragment="script">
 			<script>
 				$(function() {
-					alert("hello spring boot");
-				});
+					AsumPrice($(".price-adult-count-sum").text());
+					CsumPrice($(".price-child-count-sum").text());
+					
+					for(var i = 2; i <= $(".price-adult-count-sum").text(); i++) {
+						$(".adult-div").append("<div class='adult-div-" 
+												+ i +"'><div class='flex-space-between'><span class='TextMidTitle mid-top-margin input-adult'>성인 " 
+												+ i +"</span></div><table class='table-2 client-info'><tr><th>이름</th><td><input type='text' class='input-info' id='user_id_adult_" 
+												+ i +"' placeholder='ex.홍길동' required/></td></tr><tr><th>생년월일</th><td><input type='text' class='input-info' id='user_birthday_adult_" 
+												+ i +"' placeholder='ex.1991231' required></td><th>성별</th><td><div class='radio-info'><input type='radio' name='gender_adult" 
+												+ i +"' value='M' id='user_gender_adult_" 
+												+ i +" required'>남자&nbsp;&nbsp;&nbsp;<input type='radio' name='gender_adult" 
+												+ i +"' value='F' id='user_gender_adult_" 
+												+ i +"'>여자</div></td></tr><tr><th>이메일</th><td><input type='email' class='input-info' id='user_email_adult_" 
+												+ i +"' placeholder='ex.Hong@naver.com' ></td><th>휴대폰 번호</th><td><input type='tel' class='input-info' id='user_tel_adult_" 
+												+ i +"' placeholder='ex.010-1234-5678' ></td></tr></table></div>");
+					}
+					
+					for(var i = 1; i <= $(".price-child-count-sum").text(); i++) {
+		                $(".child-div").append("<div class='child-div-" 
+		                						+ i 
+		                						+ "'><p class='TextMidTitle mid-top-margin input-child'>아동" 
+		                						+ i 
+		                						+ "</p><table class='table-2 client-info'><tr><th>이름</th><td><input type='text' class='input-info' id='user_id_child_" 
+		                						+ i 
+		                						+ "'placeholder='ex.홍길동' required></td></tr><tr><th>생년월일</th><td><input type='text' class='input-info' id='user_birthday_child_" 
+		                						+ i 
+		                						+ "' placeholder='ex.1991231' required></td><th>성별</th><td><div class='radio-info'><input type='radio' name='gender_child"
+		                						+ i 
+		                						+"' value='M' id='user_gender_chlid_" 
+		                						+ i 
+		                						+"' required>남자&nbsp;&nbsp;&nbsp;<input type='radio' name='gender_child"
+		                						+ i 
+		                						+"' value='F' id='user_gender_chlid_"
+		                						+ i  
+		                						+"' required>여자</div></td></tr></table>");
+					}					
+
+					// plus minus 버튼 클릭시 숫자 변경
+		            // 어른
+		            $("#plus_adult").on("click", function() {
+		                var num = parseInt($(".sum-adult").text());
+		                num++;
+		                $(".sum-adult").text(num);
+		                AsumPrice(num);
+		
+		                $(".adult-div").append("<div class='adult-div-" + num +"'><div class='flex-space-between'><span class='TextMidTitle mid-top-margin input-adult'>성인 " 
+		                						+ num +"</span></div><table class='table-2 client-info'><tr><th>이름</th><td><input type='text' class='input-info' id='user_id_adult_" 
+		                						+ num +"' placeholder='ex.홍길동' required/></td></tr><tr><th>생년월일</th><td><input type='text' class='input-info' id='user_birthday_adult_" 
+		                						+ num +"' placeholder='ex.1991231' required></td><th>성별</th><td><div class='radio-info'><input type='radio' name='gender_adult" 
+		                						+ num +"' value='M' id='user_gender_adult_" 
+		                						+ num +" required'>남자&nbsp;&nbsp;&nbsp;<input type='radio' name='gender_adult" 
+		                						+ num +"' value='F' id='user_gender_adult_" 
+		                						+ num +"'>여자</div></td></tr><tr><th>이메일</th><td><input type='email' class='input-info' id='user_email_adult_" 
+		                						+ num +"' placeholder='ex.Hong@naver.com' ></td><th>휴대폰 번호</th><td><input type='tel' class='input-info' id='user_tel_adult_" 
+		                						+ num +"' placeholder='ex.010-1234-5678' ></td></tr></table></div>");
+		            });
+		
+		            $("#minus_adult").on("click", function() {
+		                var num = parseInt($(".sum-adult").text());
+		                
+		                if(num > 1)
+		                    num--;
+		                
+		                $(".sum-adult").text(num);
+		                AsumPrice(num);
+		
+		                $(".adult-div-" + (num + 1)).remove();
+		            });
+		
+		            // 아동
+		            $("#plus_child").on("click", function() {
+		                var num = parseInt($(".sum-child").text());
+		                num++;
+		                $(".sum-child").text(num);
+		                CsumPrice(num);
+		
+		                $(".child-div").append("<div class='child-div-" + num + "'><p class='TextMidTitle mid-top-margin input-child'>아동" 
+		                						+ num + "</p><table class='table-2 client-info'><tr><th>이름</th><td><input type='text' class='input-info' id='user_id_child_" 
+		                						+ num + "'placeholder='ex.홍길동' required></td></tr><tr><th>생년월일</th><td><input type='text' class='input-info' id='user_birthday_child_" 
+		                						+ num + "' placeholder='ex.1991231' required></td><th>성별</th><td><div class='radio-info'><input type='radio' name='gender_child"
+		                						+ num +"' value='M' id='user_gender_chlid_"
+		                						+ num +"' required>남자&nbsp;&nbsp;&nbsp;<input type='radio' name='gender_child"
+		                						+ num +"' value='F' id='user_gender_chlid_"
+		                						+ num +"' required>여자</div></td></tr></table>");
+		            });
+		
+		            $("#minus_child").on("click", function() {
+		                var num = parseInt($(".sum-child").text());
+		                
+		                if(num > 0)
+		                    num--;
+		                
+		                $(".sum-child").text(num);
+		                CsumPrice(num);
+		
+		                $(".child-div-" + (num + 1)).remove();
+		            });
+		
+		            // 유아
+		            $("#plus_baby").on("click", function() {
+		                var num = parseInt($(".sum-baby").text());
+		                num++;
+		                $(".sum-baby").text(num);
+		                BsumPrice(num);
+		            });
+		
+		            $("#minus_baby").on("click", function() {
+		                var num = parseInt($(".sum-baby").text());
+		                
+		                if(num > 0)
+		                    num--;
+		                
+		                $(".sum-baby").text(num);
+		                BsumPrice(num);
+		            });
+		
+		            var sumPrice = parseInt($.withoutCommas($(".price-adult-sum").text())) 
+		                           + parseInt($.withoutCommas($(".price-child-sum").text())) 
+		                           + parseInt($.withoutCommas($(".price-baby-sum").text()));
+		            $(".price-sum").text($.numberWithCommas(sumPrice));
+		
+		
+		            $("#sameBtn").on('click', function() {
+		                if ( $(this).prop('checked') ) {
+		                    $("#user_id_adult_1").attr("value", $("#user_id_00").val())
+		                                    .attr("disabled", true);
+		                    $("#user_birthday_adult_1").attr("value", $("#user_birthday_00").val())
+		                                    .attr("disabled", true);
+		                    $("#user_email_adult_1").attr("value", $("#user_email_00").val())
+		                                    .attr("disabled", true); 
+		                    $("#user_tel_adult_1").attr("value", $("#user_tel_00").val())
+		                                     .attr("disabled", true);
+		
+		                } else {
+		                    $("#user_id_adult_1").attr("value", "")
+		                                    .attr("disabled", false);                    
+		                    $("#user_birthday_adult_1").attr("value", "")
+		                                    .attr("disabled", false); 
+		                    $("#user_email_adult_1").attr("value", "")
+		                                    .attr("disabled", false); 
+		                    $("#user_tel_adult_1").attr("value", "")
+		                                    .attr("disabled", false); 
+		                }
+		            });
+		            
+		            //예약버튼 클릭 시
+		            $("#reservation").on("click", function() {
+						const list = [];
+						
+						for(let i = 1; i <= parseInt($(".sum-adult").text()); i++) {
+							const obj = {
+								name: $("#user_id_adult_" + i).val(),
+								birth: $("#user_birthday_adult_" + i).val(),
+							};
+							list.push(obj);
+						}
+						
+						for(let i = 1; i <= parseInt($(".sum-child").text()); i++) {
+							const obj = {
+								name: $("#user_id_child" + i).val(),
+								birth: $("#user_birthday_child" + i).val(),
+							};
+							list.push(obj);
+						}
+						
+						const formData = new FormData($("#reservationForm")[0]);
+						formData.append("list", JSON.stringify(list));
+						
+						$.ajax({
+							url: '/tour/reservation',
+							type: 'post',
+							processData: false,
+    						contentType: false,
+							data: formData
+						})
+					});
+		
+		        });
+		
+		        function submitAlert() {
+		            alert('예약이 완료되었습니다.');
+		        }
+		
+		
+		        // 성인 총 금액
+		        function AsumPrice(num) {
+		            $(".price-adult-count-sum").text(num);  // 성인 명수 
+		
+		            var aP = $.withoutCommas($(".price-adult").text()); // 콤마 빼기
+		
+		            var aPrice = parseInt(aP) *  parseInt($(".price-adult-count-sum").text()); // 성인 가격 합계
+		            aPrice = $.numberWithCommas(aPrice); // 콤마 찍기
+		            $(".price-adult-sum").text(aPrice); // 성인 가격 함계 텍스트 바꾸기
+		
+		            var sumPrice = parseInt($.withoutCommas($(".price-adult-sum").text())) 
+		                           + parseInt($.withoutCommas($(".price-child-sum").text())) 
+		                           + parseInt($.withoutCommas($(".price-baby-sum").text()));
+		            $(".price-sum").text($.numberWithCommas(sumPrice));   // 총가격 텍스트 바꾸기
+		        }
+		
+		        // 아동 총 금액
+		        function CsumPrice(num) {
+		            $(".price-child-count-sum").text(num);  // 명수 
+		
+		            var cP = $.withoutCommas($(".price-child").text()); // 콤마 빼기
+		
+		            var CPrice = parseInt(cP) *  parseInt($(".price-child-count-sum").text()); // 가격 합계
+		            CPrice = $.numberWithCommas(CPrice); // 콤마 찍기
+		            $(".price-child-sum").text(CPrice); // 가격 함계 텍스트 바꾸기
+		
+		            var sumPrice = parseInt($.withoutCommas($(".price-adult-sum").text())) 
+		                           + parseInt($.withoutCommas($(".price-child-sum").text())) 
+		                           + parseInt($.withoutCommas($(".price-baby-sum").text()));
+		            $(".price-sum").text($.numberWithCommas(sumPrice));   // 총가격 텍스트 바꾸기
+		        }
+		
+		        // 아기 총 금액
+		        function BsumPrice(num) {
+		            $(".price-baby-count-sum").text(num);  // 명수 
+		
+		            var bP = $.withoutCommas($(".price-baby").text()); // 콤마 빼기
+		
+		            var BPrice = parseInt(bp) *  parseInt($(".price-baby-count-sum").text()); // 가격 합계
+		            BPrice = $.numberWithCommas(BPrice); // 콤마 찍기
+		            $(".price-baby-sum").text(BPrice); // 가격 함계 텍스트 바꾸기
+		
+		            var sumPrice = parseInt($.withoutCommas($(".price-adult-sum").text())) 
+		                           + parseInt($.withoutCommas($(".price-child-sum").text())) 
+		                           + parseInt($.withoutCommas($(".price-baby-sum").text()));
+		            $(".price-sum").text($.numberWithCommas(sumPrice));  // 총가격 텍스트 바꾸기
+		        }
+		        
+		
+		
+		        // 콤마찍기
+		        $.numberWithCommas = function (x) {
+		            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		        }
+		
+		        // 콤마빼기
+		        $.withoutCommas = function (x) {
+		            return x.toString().replace(",", '');
+		        }
+		        
 			</script>
-		</th:block>-->
+		</th:block>
 	</head>
 	<body>
 		<div layout:fragment="content" class="container contetnt">
@@ -27,11 +269,11 @@
 				<table class="table-2 goods-info-table">
 					<tr>
 						<th>상품명</th>
-						<td>[${tour.tourPackage }] ${tour.tourTitle }</td>
+						<td th:text="'[' + ${reserve.tour.tourPackage } + '] ' + ${reserve.tour.tourTitle} "></td>
 					</tr>
 					<tr>
 						<th>여행기간</th>
-						<td>2022.06.24 (금) ~ 2022.06.25 (토) (${tour.tourNight }박 ${tour.tourDay }일)</td>
+						<td th:text="${reserve.startDate} + ' ~ ' + ${reserve.endDate} + ' (' + ${reserve.tour.tourNight } + '박 ' + ${reserve.tour.tourDay } + '일)'"></td>
 					</tr>
 					<tr>
 						<th>상품가격</th>
@@ -40,26 +282,23 @@
 				</table>
 			</div>
 			<!--예약자 정보-->
-			<form action="mypageFirst.html" onsubmit="submitAlert()">
+			<form id="reservationForm" action="/user/mypage" onsubmit="submitAlert()">
 				<div class="div-top-margin">
 					<p class="TextSubTitle">예약자 정보</p>
 					<table class="table-2 client-info">
 						<tr>
 							<th>이름</th>
-							<td><input type="text" class="input-info" id="user_id_00"
-								placeholder="ex.홍길동" value="불사조" required></td>
+							<td><input type="text" class="input-info" id="user_id_00" name="rName" placeholder="ex.홍길동" value="홍길동" required></td>
 							<th>이메일</th>
-							<td><input type="email" class="input-info" id="user_email_00"
-								placeholder="ex.Hong@naver.com" value="phoenix@gmail.com"
+							<td><input type="email" class="input-info" id="user_email_00" name="rUserEmail" value="Hong@naver.com" placeholder="ex.Hong@naver.com"
 								required></td>
 						</tr>
 						<tr>
 							<th>생년월일</th>
 							<td><input type="text" class="input-info"
-								id="user_birthday_00" placeholder="ex.1991231" value="19990909" required></td>
+								id="user_birthday_00" placeholder="ex.1991231" value="19911231" required></td>
 							<th>휴대폰 번호</th>
-							<td><input type="tel" class="input-info" id="user_tel_00"
-								placeholder="ex.010-1234-5678" value="010-1234-5678" required></td>
+							<td><input type="tel" class="input-info" id="user_tel_00" name="rUserTel" value="010-1234-5678" placeholder="ex.010-1234-5678" required></td>
 						</tr>
 					</table>
 				</div>
@@ -72,7 +311,7 @@
 							<p>(만 14세 이상)</p>
 							<div class="TextSubTitle sum-button sum-button-media">
 								<button type="button" id="minus_adult">-</button>
-								<p class="sum-adult">1</p>
+								<p class="sum-adult" th:text="${reserve.rAdult}"></p>
 								<button type="button" id="plus_adult">+</button>
 							</div>
 						</div>
@@ -81,7 +320,7 @@
 							<p>(만 2세 이상 만 14세 미만)</p>
 							<div class="TextSubTitle sum-button">
 								<button type="button" id="minus_child">-</button>
-								<p class="sum-child">0</p>
+								<p class="sum-child" th:text="${reserve.rChild}"></p>
 								<button type="button" id="plus_child">+</button>
 							</div>
 						</div>
@@ -90,7 +329,7 @@
 							<p>(만 2세 미만)</p>
 							<div class="TextSubTitle sum-button sum-button-media">
 								<button type="button" id="minus_baby">-</button>
-								<p class="sum-baby">0</p>
+								<p class="sum-baby" th:text="${reserve.rBaby}"></p>
 								<button type="button" id="plus_baby">+</button>
 							</div>
 						</div>
@@ -108,25 +347,25 @@
 							<table class="table-2 client-info">
 								<tr>
 									<th>이름</th>
-									<td><input type="text" class="input-info" id="user_id_01" placeholder="ex.홍길동" required /></td>
+									<td><input type="text" class="input-info" id="user_id_adult_1" placeholder="ex.홍길동" required /></td>
 								</tr>
 								<tr>
 									<th>생년월일</th>
-									<td><input type="text" class="input-info" id="user_birthday_01" placeholder="ex.1991231" required></td>
+									<td><input type="text" class="input-info" id="user_birthday_adult_1" placeholder="ex.1991231" required></td>
 	
 									<th>성별</th>
 									<td>
 										<div class="radio-info">
-											<input type="radio" name="gender_01" value="M" id="user_gender_01" required>남자&nbsp;&nbsp;&nbsp; 
-											<input type="radio" name="gender_01" value="F" id="user_gender_01">여자
+											<input type="radio" name="gender_1" value="M" id="user_gender_adult_1" required>남자&nbsp;&nbsp;&nbsp; 
+											<input type="radio" name="gender_1" value="F" id="user_gender_adult_1">여자
 										</div>
 									</td>
 								</tr>
 								<tr>
 									<th>이메일</th>
-									<td><input type="email" class="input-info" id="user_email_01" placeholder="ex.Hong@naver.com"></td>
+									<td><input type="email" class="input-info" id="user_email_adult_1" placeholder="ex.Hong@naver.com"></td>
 									<th>휴대폰 번호</th>
-									<td><input type="tel" class="input-info" id="user_tel_01" placeholder="ex.010-1234-5678"></td>
+									<td><input type="tel" class="input-info" id="user_tel_adult_1" placeholder="ex.010-1234-5678"></td>
 								</tr>
 							</table>
 						</div>
@@ -142,27 +381,27 @@
 							<table class="price-table">
 								<tr>
 									<th class="">성인</th>
-									<td class="price-adult price-table-price">${tour.tourPriceAdult }</td>
+									<td class="price-adult price-table-price" th:text="${#numbers.formatInteger(reserve.tour.tourPriceAdult, 0, 'COMMA')}"></td>
 									<td class="price-table-td">X</td>
-									<td class="price-adult-count-sum price-table-count-sum">1</td>
+									<td class="price-adult-count-sum price-table-count-sum" th:text="${reserve.rAdult}"></td>
 									<td class="price-table-td">명</td>
-									<td class="price-adult-sum price-table-sum">${tour.tourPriceAdult }</td>
+									<td class="price-adult-sum price-table-sum"></td>
 									<td class="price-table-td">원</td>
 								</tr>
 								<tr>
 									<th class="">아동</th>
-									<td class="price-child price-table-price">${tour.tourPriceChild }</td>
+									<td class="price-child price-table-price" th:text="${#numbers.formatInteger(reserve.tour.tourPriceChild, 0, 'COMMA')}"></td>
 									<td class="price-table-td">X</td>
-									<td class="price-child-count-sum price-table-count-sum">0</td>
+									<td class="price-child-count-sum price-table-count-sum" th:text="${reserve.rChild}"></td>
 									<td class="price-table-td">명</td>
-									<td class="price-child-sum price-table-sum">0</td>
+									<td class="price-child-sum price-table-sum"></td>
 									<td class="price-table-td">원</td>
 								</tr>
 								<tr>
 									<th class="">유아</th>
-									<td class="price-baby price-table-price">${tour.tourPriceBaby }</td>
+									<td class="price-baby price-table-price" th:text="${#numbers.formatInteger(reserve.tour.tourPriceBaby, 0, 'COMMA')}"></td>
 									<td class="price-table-td">X</td>
-									<td class="price-baby-count-sum price-table-count-sum">0</td>
+									<td class="price-baby-count-sum price-table-count-sum" th:text="${reserve.rBaby}"></td>
 									<td class="price-table-td">명</td>
 									<td class="price-baby-sum price-table-sum">0</td>
 									<td class="price-table-td">원</td>
@@ -182,7 +421,7 @@
 				</div>
 				<!--예약 버튼-->
 				<div class="top-bottom-margin flex-center">
-					<input type="submit" class="button" id="reservation" value="예약하기">
+					<input type="button" class="button" id="reservation" value="예약하기">
 					<button type="button" class="button" id="back" onClick="history.back()">취소</button>
 				</div>
 			</form>

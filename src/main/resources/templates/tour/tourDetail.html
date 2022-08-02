@@ -11,7 +11,19 @@
 		</th:block>
 		
 		<th:block layout:fragment="script">
-			<script>
+			<script th:inline="javascript">
+				function goReservationPage() {
+					/*<[CDATA[*/
+					const tourSeq = /*[[${tour.tourSeq}]]*/;
+					/*]]>*/
+					location.href = '/tour/reservation?tour=' + tourSeq 
+									+ '&startDate=' + $(".startDate").text() 
+									+ '&endDate=' + $('.endDate').text() 
+									+ '&rAdult=' + $(".sum-adult").text()
+									+ '&rChild=' + $(".sum-child").text()
+									+ '&rBaby=' + $(".sum-baby").text();
+				}
+			
 				$(function(){
             
 		            // 달력 생성
@@ -92,8 +104,12 @@
 		                       .css("color", "#ffffff");
 		                
 		                var index = $("#cal tbody td").index(this);
+		                
+		                /*<[CDATA[*/
+						const night = /*[[${tour.tourNight}]]*/;
+						/*]]>*/
 		     
-		                $("#cal tbody td").eq(index + 1).css("background", "#e74c3c")
+		                $("#cal tbody td").eq(index + night).css("background", "#e74c3c")
 		                                     .css("color", "#ffffff");
 		                
 		
@@ -108,7 +124,7 @@
 		                var startdate = $(".year_mon").text() + " " + $(this).text() + "일 (" + $(".cal-top th").eq(day).text() + ")";
 		                $(".startDate").text(startdate);
 		
-		                var enddate = $(".year_mon").text() + " " + $("#cal tbody td").eq(index + 1).text() + "일 (" + $(".cal-top th").eq(day + 1).text() + ")";
+		                var enddate = $(".year_mon").text() + " " + $("#cal tbody td").eq(index + night).text() + "일 (" + $(".cal-top th").eq(day + night).text() + ")";
 		                $(".endDate").text(enddate);
 		
 		                $(".btnR2").hide();
@@ -435,7 +451,7 @@
 	                    </div>
 	                    <div class="if-bottom">
 	                        <p>예약현황 : 현재예약 0 명 / 최대예약 0명 (최소출발인원 0명)</p>
-	                        <p>일 정 : <span class="startDate"></span> ~ <span class="endDate"></span> / <span th:text="${tour.tourNight } + '박 ' + ${tour.tourDay } + '일'"></span></p>
+	                        <p>일 정 : <span class="startDate" name="startDate"></span> ~ <span class="endDate" name="endDate"></span> / <span th:text="${tour.tourNight } + '박 ' + ${tour.tourDay } + '일'"></span></p>
 	                        <p>여행도시 : 전라북도 전주시</p>
 	                    </div>
 	                </div>
@@ -480,7 +496,7 @@
 	                <div class="sum personnel-div-bottom">
 	                    <table class="price-sum-table">
 	                        <tr>
-	                            <th class="">총 금액</th>
+	                            <th>총 금액</th>
 	                            <td class="price-sum" th:text="${#numbers.formatInteger(tour.tourPriceAdult, 0, 'COMMA')}"></td>
 	                            <td class="price-sum-table-td">원</td>
 	                        </tr>
@@ -490,7 +506,10 @@
 	
 	            <!--예약 버튼-->
 	            <div class="rbtn reservation-div">
-	                <button type="button" class="btnR btnR1" data-bs-toggle="modal" data-bs-target="#r1" onclick="location.href='/tour/reservation'">예약</button>
+	                <button type="button" class="btnR btnR1" data-bs-toggle="modal" data-bs-target="#r1" 
+	                		onclick="goReservationPage()">
+	                		예약
+	                </button>
 	                <button type="button" class="btnR btnR2" data-bs-toggle="modal" data-bs-target="#r2">예약</button>
 	<!--                 <div class="modal fade modal-sm" id="r1">
 	                    <div class="modal-dialog modal-dialog-centered">

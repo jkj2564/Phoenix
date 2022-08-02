@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.phoenix.entitiy.Reserve;
 import com.spring.phoenix.entitiy.Tour;
 import com.spring.phoenix.entitiy.TourFile;
+import com.spring.phoenix.repository.ReserveRepository;
 import com.spring.phoenix.repository.TourFileRepository;
 import com.spring.phoenix.repository.TourRepository;
 import com.spring.phoenix.service.tour.TourService;
@@ -18,6 +20,9 @@ public class TourServiceImpl implements TourService {
 	
 	@Autowired
 	TourFileRepository tourFileRepository;
+	
+	@Autowired
+	ReserveRepository reserveRepository;
 	
 	@Override
 	public int insertTour(Tour tour) {
@@ -60,4 +65,5 @@ public class TourServiceImpl implements TourService {
 			return fileList;
 		}
 	}
+	
 }

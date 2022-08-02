@@ -2,6 +2,7 @@ package com.spring.phoenix.service.tour;
 
 import java.util.List;
 
+import com.spring.phoenix.entitiy.Reserve;
 import com.spring.phoenix.entitiy.Tour;
 import com.spring.phoenix.entitiy.TourFile;
 
@@ -18,5 +19,5 @@ public interface TourService {
 	Tour tourDeatil(int tourSeq);
 	
 	List<TourFile> tourDatilFile(int tourSeq);
-	
+		
 }
