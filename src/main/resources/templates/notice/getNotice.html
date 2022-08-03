@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+	  	<title>index</title>
+	  	<th:block layout:fragment="css">
+	  	  <link rel="stylesheet" th:href="@{/css/notice-style.css}">
+	  	</th:block>	
+	</head>
+	<body>
+		<header></header>
+          <div layout:fragment="content">
+            <div class="All-Wrapper-fix">
+		     <!--본문 부분-->
+		     <div class="txt-title">
+		        <div>
+		            <strong class="big-tit">
+		                <p>일반</p>
+		            </strong>
+		        </div> 
+		    </div>
+             <div class="notice-board-wrap">
+			    <div class="nb-head">
+	               <span class="state">[서비스]</span>
+	               <span class="tit">시스템 점검에 따른 이용제한 안내</span>
+	               <span class="date">2022.06.17</span>
+		        </div>
+		        
+		        <div class="nb-cont">
+		            <p>안녕하세요. 피닉스 투어입니다.<br>
+		               투어/입장권 시스템 점검으로 인하여, 투어/입장권 이용이 일시적으로 중단될 예정입니다.</p>
+		        
+		            <P>■ 작업일시 - 2021년 12월 9일(목) AM 00:00 ~ AM 02:00 (2시간)<br>
+		            ■ 사유 - 투어/입장권 시스템 점검 및 안정화<br>
+		            ■ 영향범위 - 투어/입장권 상세 확인 및 구매/취소 불가</P>
+		
+		            <p>서비스 이용에 불편을 드리게 되어 진심으로 사과드리며 고객님의 양해 부탁드립니다.<br>   
+		            앞으로 하나투어는 더 나은 서비스를 제공해 드리기 위해 최선을 다하겠습니다.</p>
+		 
+		            <p>감사합니다.</p>
+		        </div>
+			  </div>
+			  
+			  <div class="btn-wrap">
+				     <button type="button" class="btn-bd-cont">
+				        <a th:href="@{/notice/insertNotice}">등록</a>
+				    </button>
+				    <button type="button" class="btn-bd-cont">
+				        <a th:href="@{/notice/getNoticeList}">등록</a>
+				    </button>
+				    <button type="button" class="btn-bd-cont">
+				        삭제
+				    </button>
+			  </div>
+			  
+			  <ul class="pg-updown">
+			        <li>
+			            <span><img th:src="@{/images/up1.png}" alt="업" id="updown">다음글</span>
+			            <a href="#"> 페이지 끝 입니다.</a>
+			        </li>
+			        <li>
+			            <span><img th:src="@{/images/down1.png}" alt="다운" id="updown">이전글</span>
+			            <a href="Notice-normal_ex2.html">[공지] [해외항공] 부정기편 탑승 제한조건 안내</a>
+			        </li>
+			  </ul>
+	       </div>
+          </div>
+		<footer></footer>
+	</body>
+</html>

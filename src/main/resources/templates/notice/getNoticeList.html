@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+	  	<title>index</title>
+	  	<th:block layout:fragment="css"> 	  	
+	  	  <link rel="stylesheet" th:href="@{/css/notice-style.css}">	  	  
+	  	</th:block>	
+	</head>
+	<body>
+		<header></header>
+          <div layout:fragment="content">
+             <div class="All-Wrapper">
+			        <!--사이드바 부분-->
+			       <div id="snb" class="snb">
+			            <dl>
+			                <dt class="sub-title">
+			                    <a th:href="@{/notice/getNoticeList}">공지사항</a>
+			                </dt>
+			                <dd>
+			                    <ul class="sub-menu">
+			                        <li><a th:href="@{/notice/getNoticeList}">일반</a></li>
+			                        <li><a th:href="@{/notice/getNoticeList}">안전</a></li>
+			                        <li id="product"><a th:href="@{/notice/getNoticeList}">상품 관련</a></li>
+			                    </ul>
+			                </dd>
+			            </dl>
+			        </div>
+			        <!--본문 부분-->
+			        <div class="Contents-wrap.fix">
+			            <div class="txt-title">
+			                <div>
+			                    <strong class="big-tit">
+			                        <p>일반</p>
+			                    </strong>
+			                </div>
+			               
+			                <div class="dropdown-bd">
+			                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1"
+			                        data-bs-toggle="dropdown" aria-expanded="false">
+			                        ==선택==
+			                    </button>
+			                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+			                        <li><a class="dropdown-item" href="#">제목</a></li>
+			                        <li>
+			                            <hr class="dropdown-divider">
+			                        </li>
+			                        <li><a class="dropdown-item" href="#">내용</a></li>
+			                        <li>
+			                            <hr class="dropdown-divider">
+			                        </li>
+			                        <li><a class="dropdown-item" href="#">제목+내용</a></li>
+			                    </ul>
+			                </div>
+			                <div class="BD-search">
+			                    <form class="bd-search">
+			                        <input type="text" class="form" placeholder="검색어를 입력해 주세요." aria-label="Search">
+			                        <a href="#"><img th:src="@{/images/ico-search.png}" id="bd-sc-img" alt="검색"></a>
+			                    </form>
+			                </div>
+			            
+			            </div>
+			            <div >
+			                <ul class="tabs" style="border-right-color:gray;">
+			                    <li style="border-bottom: none; background-color: #fff;">
+			                        <a th:href="@{/notice/getNoticeList}" id="normal">일반</a>
+			                    </li>
+			                    <li style="border-top-color: gray;">
+			                        <a th:href="@{/notice/getNoticeList}" id="safe">안전</a>
+			                    </li>
+			                    <li style="border-top-color: gray; 
+			                               border-left-color:gray;
+			                               border-right: 1px solid gray;">
+			                        <a th:href="@{/notice/getNoticeList}" id="product-01">상품 관련</a>
+			                    </li>
+			                </ul>
+			            </div>
+			            <div>
+			                <table border=1 class="tg">
+			                    <thead class="tb-head">
+			                        <tr>
+			                            <th class="tb-num">번호</th>
+			                            <th class="tb-div">구분</th>
+			                            <th class="tb-tit">제목</th>
+			                            <th class="tb-dat">등록일</th>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                        <tr>
+			                            <td class="tb-sub-sum">10</td>
+			                            <td>서비스</td>
+			                            <td class="tb-sub-tit" style="cursor:pointer;">
+			                              <a th:href="@{/notice/getNotice}">시스템 점검에 따른 이용제한 안내</a>
+			                            </td>
+			                            <td class="tb-sub-dat">2022-06-17</td>
+			                        </tr>
+			                        <tr th:each="board : ${boardList}">
+			                           <td th:text="${notice.noticeSeq}"></td>
+			                           <td th:text="${notice.noticeDiv}"></td>
+			                           <td>
+			                             <a th:text="${notice.noticeTitle}"></a>
+			                           </td>
+			                           <td th:text="${#temporals.format(notice.noticeRegdate, 'yyyy-MM-dd')}"></td>
+			                        </tr>
+			                    </tbody>
+			                </table>
+			                <div style="display:flex; justify-content: center;">
+			                <nav aria-label="Page navigation example">
+			                    <ul class="pagination">
+			                      <li class="page-item">
+			                        <a class="page-link" href="#" aria-label="Previous">
+			                          <span aria-hidden="true">&laquo;</span>
+			                        </a>
+			                      </li>
+			                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+			                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+			                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+			                      <li class="page-item"><a class="page-link" href="#">4</a></li>
+			                      <li class="page-item">
+			                        <a class="page-link" href="#" aria-label="Next">
+			                          <span aria-hidden="true">&raquo;</span>
+			                        </a>
+			                      </li>
+			                    </ul>
+			                  </nav>
+			                    <div class="Btn_1">
+			                        <a th:href="@{/notice/insertNotice}">글등록</a>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+          </div>
+		<footer></footer>
+	</body>
+</html>
