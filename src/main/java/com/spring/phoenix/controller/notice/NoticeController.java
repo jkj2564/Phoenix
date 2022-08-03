@@ -1,4 +1,4 @@
-package com.spring.boardweb.controller.notice;
+package com.spring.phoenix.controller.notice;
 
 import java.io.IOException;
 
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.boardweb.entity.Notice;
-import com.spring.boardweb.service.notice.NoticeService;
+import com.spring.phoenix.entitiy.Notice;
+import com.spring.phoenix.service.notice.NoticeService;
 
 @RestController
 @RequestMapping("/notice")
-public class NoticePageController {
+public class NoticeController {
 	 @Autowired
 	 NoticeService noticeService;
 	
