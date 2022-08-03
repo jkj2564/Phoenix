@@ -64,4 +64,5 @@ public class Reserve {
 	
 	private LocalDateTime boardMdfDate = LocalDateTime.now();
 	
+	
 }
