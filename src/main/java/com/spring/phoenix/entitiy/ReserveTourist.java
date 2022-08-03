@@ -24,18 +24,18 @@ public class ReserveTourist {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int TouristIdx;
+	private int touristSeq;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private String age;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private String tName;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private String tBirth;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private String tGender;
 	
 	private String tEmail;

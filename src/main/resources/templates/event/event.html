@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+		<title>index</title>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/event_style.css}">
+		</th:block>
+		<!--<th:block layout:fragment="script">
+			<script>
+				$(function() {
+					alert("hello spring boot");
+				});
+			</script>
+		</th:block>-->
+	</head>
+	<body>
+		<div layout:fragment="content" class="container div-margin">
+	        <p class="TextTitle">이벤트</p>
+	        <hr>
+	        <div class="grid">
+	            <div class="card">
+	                <img src="images/event1.png" class="card-img-top" alt="이벤트1">
+	            
+	                <div class="card-body">
+	                    <h5 class="card-title">신한카드 최대 21만원 할인</h5>
+	                    <p class="card-text">여행은 피닉스투어! 카드는 신한카드! 7% 청구할인!</p>
+	                    <a href="shinhancardevent_page.html" class="btn btn-primary">Read More</a>
+	                </div>
+	            </div>
+	            
+	            <div class="card">
+	                <img src="images/event2.png" class="card-img-top" alt="이벤트2">
+	            
+	                <div class="card-body">
+	                    <h5 class="card-title">면세점 혜택</h5>
+	                    <p class="card-text">설레는 여행 또다른 즐거움~
+	                        <br>멤버십 등급에 따른 면세점 혜택!
+	                    </p>
+	                    <a href="dutyfreeevent_page.html" class="btn btn-primary">Read More</a>
+	                </div>
+	            </div>
+	
+	            <div class="card">
+	                <img src="images/event3.png" class="card-img-top" alt="이벤트3">
+	            
+	                <div class="card-body">
+	                    <h5 class="card-title">이달의 카드 혜택</h5>
+	                    <p class="card-text">스마트한 쇼핑을 위한 6월 결제 혜택! 
+	                        <br>신용카드 무이자 할부 카드사 확인하기!</p>
+	                    <a href="cardevent_page.html" class="btn btn-primary">Read More</a>
+	                </div>
+	            </div>
+	
+	            <div class="card">
+	                <img src="images/event4.png" class="card-img-top" alt="이벤트4">
+	            
+	                <div class="card-body">
+	                    <h5 class="card-title">네이버페이로 결제시 1.5% 추가적립</h5>
+	                    <p class="card-text">편라한 결제, 안전한 결제, 쌓이는 혜택
+	                        <br>혜택을 확인해보세요!
+	                    </p>
+	                    <a href="https://pay.naver.com/about" class="btn btn-primary">Read More</a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</body>
+</html>

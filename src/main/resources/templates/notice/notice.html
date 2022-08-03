@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+		<title>index</title>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/notice_style.css}">
+		</th:block>
+		<!--<th:block layout:fragment="script">
+			<script>
+				$(function() {
+					alert("hello spring boot");
+				});
+			</script>
+		</th:block>-->
+	</head>
+	<body>
+		<div layout:fragment="content" class="All-Wrapper">
+			<!--사이드바 부분-->
+			<div id="snb" class="snb">
+				<dl>
+					<dt class="sub-title">
+						<a href="Notice-normal.html">공지사항</a>
+					</dt>
+					<dd>
+						<ul class="sub-menu">
+							<li><a href="Notice-normal.html">일반</a></li>
+							<li><a href="Notice-safe.html">안전</a></li>
+							<li id="product"><a href="Notice-product.html">상품 관련</a></li>
+						</ul>
+					</dd>
+				</dl>
+			</div>
+			<!--본문 부분-->
+			<div class="Contents-wrap.fix">
+				<div class="txt-title">
+					<div>
+						<strong class="big-tit">
+							<p>일반</p>
+						</strong>
+					</div>
+		
+					<div class="dropdown-bd">
+						<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							==선택==
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							<li><a class="dropdown-item" href="#">제목</a></li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+							<li><a class="dropdown-item" href="#">내용</a></li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+							<li><a class="dropdown-item" href="#">제목+내용</a></li>
+						</ul>
+					</div>
+					<div class="BD-search">
+						<form class="bd-search">
+							<input type="text" class="form" placeholder="검색어를 입력해 주세요." aria-label="Search">
+							<a href="#"><img th:src="@{/images/ico-search.png}" id="bd-sc-img" alt="검색"></a>
+						</form>
+					</div>
+		
+				</div>
+				<div>
+					<ul class="tabs" style="border-right-color:gray;">
+						<li style="border-bottom: none; background-color: #fff;">
+							<a href="Notice-normal.html" id="normal">일반</a>
+						</li>
+						<li style="border-top-color: gray;">
+							<a href="Notice-safe.html" id="safe">안전</a>
+						</li>
+						<li style="border-top-color: gray; 
+			                               border-left-color:gray;
+			                               border-right: 1px solid gray;">
+							<a href="Notice-product.html" id="product-01">상품 관련</a>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<table border=1 class="tg">
+						<thead class="tb-head">
+							<tr>
+								<th class="tb-num">번호</th>
+								<th class="tb-div">구분</th>
+								<th class="tb-tit">제목</th>
+								<th class="tb-dat">등록일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="tb-sub-sum">10</td>
+								<td>서비스</td>
+								<td class="tb-sub-tit" onclick="location.href='Notice-normal_ex1.html'" style="cursor:pointer;">
+									시스템 점검에 따른 이용제한 안내</td>
+								<td class="tb-sub-dat">2022-06-17</td>
+							</tr>
+							<tr>
+								<td class="tb-sub-sum">9</td>
+								<td>일반</td>
+								<td class="tb-sub-tit" onclick="location.href='Notice-normal_ex2.html'" style="cursor:pointer;">
+									[공지] 부정기편 탑승 제한조건 안내</td>
+								<td class="tb-sub-dat">2022-06-17</td>
+							</tr>
+							<tr>
+								<td class="tb-sub-sum">8</td>
+								<td>일반</td>
+								<td class="tb-sub-tit" onclick="location.href='Notice-normal_ex3.html'" style="cursor:pointer;">
+									[공지] 오미크론 변이 관련 취소료 규정 변경 공지</td>
+								<td class="tb-sub-dat">2022-06-17</td>
+							</tr>
+							<tr>
+								<td class="tb-sub-sum">7</td>
+								<td>서비스</td>
+								<td class="tb-sub-tit">준비 중입니다.</td>
+								<td class="tb-sub-dat">2022-06-17</td>
+							</tr>
+							<tr>
+								<td class="tb-sub-sum">6</td>
+								<td>일반</td>
+								<td class="tb-sub-tit">준비 중입니다.</td>
+								<td class="tb-sub-dat">2022-06-17</td>
+							</tr>
+							<tr>
+								<td class="tb-sub-sum">5</td>
+								<td>당첨자발표</td>
+								<td class="tb-sub-tit">준비 중입니다.</td>
+								<td class="tb-sub-dat">2022-06-17</td>
+							</tr>
+							<tr>
+								<td class="tb-sub-sum">4</td>
+								<td>서비스</td>
+								<td class="tb-sub-tit">준비 중입니다.</td>
+								<td class="tb-sub-dat">2022-06-17</td>
+							</tr>
+							<tr>
+								<td class="tb-sub-sum">3</td>
+								<td>서비스</td>
+								<td class="tb-sub-tit">준비 중입니다.</td>
+								<td class="tb-sub-dat">2022-06-17</td>
+							</tr>
+							<tr>
+								<td class="tb-sub-sum">2</td>
+								<td>당첨자발표</td>
+								<td class="tb-sub-tit">준비 중입니다.</td>
+								<td class="tb-sub-dat">2022-06-17</td>
+							</tr>
+							<tr>
+								<td class="tb-sub-sum">1</td>
+								<td>일반</td>
+								<td class="tb-sub-tit">준비 중입니다.</td>
+								<td class="tb-sub-dat">2022-06-17</td>
+							</tr>
+						</tbody>
+					</table>
+					<div>
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<li class="page-item">
+									<a class="page-link" href="#" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+								<li class="page-item"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#">4</a></li>
+								<li class="page-item">
+									<a class="page-link" href="#" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

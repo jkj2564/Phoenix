@@ -6,20 +6,68 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>index</title>
-		<!--<th:block layout:fragment="css">
-			<link rel="stylesheet" th:href="@{/css/test.css}">
+		<th:block layout:fragment="css">
+		    <link rel="stylesheet" th:href="@{/css/mainpage_style.css}">
 		</th:block>
 		<th:block layout:fragment="script">
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 			<script>
-				$(function() {
-					alert("hello spring boot");
+				$(function () {
+					var w = window;
+					if (w.ChannelIO) {
+						return (window.console.error || window.console.log || function () { })('ChannelIO script included twice.');
+					}
+					var ch = function () {
+						ch.c(arguments);
+					};
+					ch.q = [];
+					ch.c = function (args) {
+						ch.q.push(args);
+					};
+					w.ChannelIO = ch;
+					function l() {
+						if (w.ChannelIOInitialized) {
+							return;
+						}
+						w.ChannelIOInitialized = true;
+						var s = document.createElement('script');
+						s.type = 'text/javascript';
+						s.async = true;
+						s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+						s.charset = 'UTF-8';
+						var x = document.getElementsByTagName('script')[0];
+						x.parentNode.insertBefore(s, x);
+					}
+					if (document.readyState === 'complete') {
+						l();
+					} else if (window.attachEvent) {
+						window.attachEvent('onload', l);
+					} else {
+						window.addEventListener('DOMContentLoaded', l, false);
+						window.addEventListener('load', l, false);
+					}
+				})();
+				ChannelIO('boot', {
+					"pluginKey": "c498a3f0-bc44-4712-af00-2edbe69be5d6"
 				});
+				
+			    $(function () {
+
+
+						$("#customer").on("click", function (e) {
+							e.preventDefault();
+							$('div[data-ch-testid="launcher"]').click();
+						})
+
+					});
 			</script>
-		</th:block>-->
+		</th:block>
 	</head>
 	<body>
-		<div layout:fragment="content" style="text-align: center;">
-			<h1>게시판 홈 화면입니다.</h1>
+		<div layout:fragment="content" class="container" style="text-align: center;">
+			<h1> home </h1>
 		</div>
 	</body>
 </html>

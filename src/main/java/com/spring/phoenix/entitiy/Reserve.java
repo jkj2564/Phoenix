@@ -28,12 +28,12 @@ public class Reserve {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "T_PH_RESERVE_SEQ_GENERATOR" )
-	private int reserveIdx;
+	private int reserveSeq;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private String startDate;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private String endDate;
 	
 
@@ -48,16 +48,16 @@ public class Reserve {
 
 	private String rUserTel;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private int rAdult;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private int rChild;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private int rBaby;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private int rPrice;
 	
 	private LocalDateTime boardRegDate = LocalDateTime.now();

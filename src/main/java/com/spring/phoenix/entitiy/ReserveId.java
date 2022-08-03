@@ -8,5 +8,5 @@ import lombok.Data;
 public class ReserveId implements Serializable {
 	private int reserve;
 	
-	private int TouristIdx;
+	private int touristSeq;
 }
