@@ -1,4 +1,4 @@
-package com.spring.phoenix.review;
+package com.spring.phoenix.controller.review;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
