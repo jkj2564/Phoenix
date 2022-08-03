@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+		<title>index</title>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/j_style.css}">
+		</th:block>
+		<!--<th:block layout:fragment="script">
+			<script>
+				$(function() {
+					alert("hello spring boot");
+				});
+			</script>
+		</th:block>-->
+	</head>
+	<body>
+		<div layout:fragment="content" class="wrapper">
+			<div class="review">
+				<br><br>
+				<div1>
+					<!--드롭다운-->
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownButton"
+						data-bs-toggle="dropdown" aria-expanded="false">
+						여행지별 리뷰
+					</button>
+					<ul class="dropdown-menu">
+						<li id="dropdown"><a class="dropdown-item" href="PHOENIX TOUR Review.html">[친구 패키지] 전주 #한옥마을 #베스트웨스턴 #1박
+								#한복체험 #상품권</a></li>
+						<li id="dropdown"><a class="dropdown-item" href="PHOENIX TOUR Review.html">[친구 패키지] 고창 #라벤더 #수국 #꽃잔치
+								#청농원 #선운사 #무장읍성</a></li>
+						<li id="dropdown"><a class="dropdown-item" href="PHOENIX TOUR Review.html">[연인 패키지] 제주 #우도관광 #제주특식 #실속여행
+								#섬여행 #봄여행</a></li>
+						<li id="dropdown"><a class="dropdown-item" href="PHOENIX TOUR Review.html">[연인 패키지] 여수 #여수해상케이블카 #오동도
+								#향일암 # 벽화마을</a></li>
+						<li id="dropdown">
+							<hr class="dropdown-divider">
+						</li>
+						<li id="dropdown"><a class="dropdown-item" href="PHOENIX TOUR Review.html">[가족 패키지] 울산 #대왕암공원 # 일산해변
+								#울기등대 #트래킹영주</a></li>
+						<li id="dropdown"><a class="dropdown-item" href="PHOENIX TOUR Review.html">[가족 패키지] 영주 #부석사 #백두대간 #협곡열차
+								#산타마을 #당일치기</a></li>
+						<li id="dropdown"><a class="dropdown-item" href="PHOENIX TOUR Review.html">[가족 패키지] 춘천 #레고랜드 #이색체험 #가족여행
+								#우리 아이와</a></li>
+						<li id="dropdown"><a class="dropdown-item" href="PHOENIX TOUR Review.html">[가족 패키지] 제주 #신화월드 랜딩관 #무민랜드
+								#뮤즈티켓 #볼링 #렌트카</a></li>
+						<li id="dropdown">
+							<hr class="dropdown-divider">
+						</li>
+						<li id="dropdown"><a class="dropdown-item" href="PHOENIX TOUR Review.html">[애완동물 패키지] 울주 #반려견동반 #1박 2일
+								#독채펜션 #영남알프스</a></li>
+						<li id="dropdown"><a class="dropdown-item" href="PHOENIX TOUR Review.html">[애완동물 패키지] 부산 #송도 #송도케이블카
+								#오륙도스카이워크 #해운대</a></li>
+					</ul>
+				</div1>
+				<br><br><br><br><br>
+		
+				<div class="container1">
+					<!--구매만족도-->
+					<div class="align">
+						<p1>구매만족도</p1>
+						<div class="item1">
+		
+							<br><br><br>
+							<h1>4.7</h1>
+		
+							<img src="images/star5.jpg" alt="5점" id="five">
+							<br><br><br>
+							<p>14,616건</p>
+						</div>
+					</div>
+		
+					<div class="align">
+						<div class="item2">
+							<p1>나이별 구매비율</p1>
+							<br>
+							<img src="images/chart1.png" id="img" alt="구매만족도">
+						</div>
+					</div>
+				</div>
+		
+				<br><br>
+		
+				<div class="container1">
+					<!--동영상&포토-->
+					<div class="align">
+						<div class="video">
+							<p1>동영상 리뷰</p1>
+							<a href="https://www.youtube.com/watch?v=Ui-U66uB-So">
+								<img src="https://i.ytimg.com/an_webp/Ui-U66uB-So/mqdefault_6s.webp?du=3000&sqp=CNzJypUG&rs=AOn4CLDV3_jLx6AI4vAMEuGueT_mpsk8KA"
+									width=500px height=333px alt="travel">
+							</a>
+						</div>
+					</div>
+		
+					<div class="align">
+						<div class="photo">
+							<p1>포토 리뷰</p1>
+							<div class="top-slide">
+								<!--캐러셀 영역 설정-->
+								<div class="carousel" data-bs-ride="carousel" id="themephoto">
+									<!--케러셀 하단의 불릿 영역-->
+									<div class="carousel-indicators">
+										<button type="button" data-bs-target="#themephoto" data-bs-slide-to="0"
+											class="active"></button>
+										<button type="button" data-bs-target="#themephoto" data-bs-slide-to="1"></button>
+										<button type="button" data-bs-target="#themephoto" data-bs-slide-to="2"></button>
+									</div>
+									<!--케러셀 슬라이드 영역-->
+									<div class="carousel-inner">
+										<!--케러셀 슬라이드 콘텐츠 추가-->
+										<div class="carousel-item active">
+											<img src="images/theme1-1_1.jpg" id="img" alt="테마1-1-1">
+											<!--캐러셀 슬라이드 제목 및 설명 추가-->
+											<div class="carousel-caption">
+												<h4></h4>
+												<p></p>
+											</div>
+										</div>
+		
+										<div class="carousel-item">
+											<img src="images/theme1-1_2.png" id="img" alt="테마1-1-2">
+											<!--캐러셀 슬라이드 제목 및 설명 추가-->
+											<div class="carousel-caption">
+												<h4></h4>
+												<p></p>
+											</div>
+										</div>
+										<div class="carousel-item">
+											<img src="images/theme1-1_3.png" id="img" alt="테마1-1-3">
+											<!--캐러셀 슬라이드 제목 및 설명 추가-->
+											<div class="carousel-caption">
+												<h4></h4>
+												<p></p>
+											</div>
+		
+										</div>
+									</div>
+									<!--캐러셀 좌우 버튼 영역-->
+									<a href="#themephoto" class="carousel-control-prev" data-bs-slide="prev">
+										<span class="carousel-control-prev-icon"></span>
+									</a>
+									<a href="#themephoto" class="carousel-control-next" data-bs-slide="next">
+										<span class="carousel-control-next-icon"></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br><br>
+				<hr>
+				<p1 id="section2">리뷰 쓰기</p1>
+				<hr>
+				<!--리뷰글1-->
+		
+				<img src="images/woman.png" id="icon">
+				<p3>길동맘^^</p3>
+				<img src="images/star5.jpg" alt="별점5" id="five2">
+				<br>
+		
+				<div class="review_box">
+					<p>
+						3명 친구와 다녀왔는데 피닉스투어 에서
+						좋은 패키지 해주셔서 여러 지역 다녀왔지만 정말행복했어요 ^^
+						숙소 가격대비 만족했구요 기사님 덕분에 다 너무 즐거웠어요
+						가는곳마다 재미있게 설명해주시고 한분한분 다신경 써주셔서 즐거운 행복한 여행으로
+						마음속에 담아둘겁니다 피닉스투어 좋은 상품 많이 만들어주세요 감사합니다 ~번창하시고요
+					</p>
+				</div>
+		
+				<!--리뷰글2-->
+				<img src="images/boy.png" id="icon">
+				<p3>이몽룡</p3>
+				<img src="images/star5.jpg" alt="별점5" id="five2">
+				<br>
+				<div class="review_box">
+					<p>
+						비트캠프 동기들과 놀러 갔다 왔어요
+						요즘 대세인 피닉스 투어 패키지 이용했더니 신경쓸게 하나도 없어서 너무 좋아요
+						피닉스 투어 화이팅 4조화이팅
+					</p>
+				</div>
+				<!--리뷰글3-->
+				<img src="images/girl.png" id="icon">
+				<p3>성춘향</p3>
+				<img src="images/star5.jpg" alt="별점5" id="five2">
+				<br>
+				<div class="review_box">
+					<p>
+						몽룡이가 장원급제해서 기념 여행 다녀왔어요
+					</p>
+				</div>
+				<!--리뷰글4-->
+		
+				<img src="images/man.png" id="icon">
+				<p3>변사또</p3>
+				<img src="images/star5.jpg" alt="별점5" id="five2">
+		
+				<br>
+				<div class="review_box">
+					<p>
+						옆 동네 사또들과 좋은 추억 만들고 갑니다~
+					</p>
+				</div>
+				<br><br><br>
+		
+				<!--글쓰기 버튼-->
+				<button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#intro" id="write">
+					글쓰기
+				</button>
+				<br><br><br>
+				<!--모달창-->
+				<div class="modal fade" id="intro">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">리뷰 쓰기</h4>
+							</div>
+							<div class="modal-body">
+								<!--별점-->
+								<form name="myform" id="myform" method="post" action="./save">
+									<fieldset>
+										<legend></legend>
+										<p>별점</p>
+										<input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+										<input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+										<input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+										<input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+										<input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+									</fieldset>
+								</form>
+								<br><br>
+		
+								<!--파일첨부-->
+								<form action="" method="post" enctype="multipart/form-data" name=""
+									style="width: fit-content; margin:0 auto;">
+									<input type="file" name="FileName" id="file">
+								</form>
+		
+								<textarea class="box" type="text"></textarea>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn" data-bs-dismiss="modal">
+									입력
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item">
+								<a class="page-link" href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">4</a></li>
+							<li class="page-item">
+								<a class="page-link" href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

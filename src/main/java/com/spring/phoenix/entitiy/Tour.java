@@ -15,13 +15,13 @@ import lombok.Data;
 @Entity
 @Table(name="T_PH_TOUR")
 @Data
-@SequenceGenerator(name="T_TOUR_SEQ_GENERATOR",
-					sequenceName="T_TOUR_SEQ",
+@SequenceGenerator(name="T_PH_TOUR_SEQ_GENERATOR",
+					sequenceName="T_PH_TOUR_SEQ",
 					initialValue=1,
 					allocationSize=1)
 public class Tour {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "T_TOUR_SEQ_GENERATOR")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "T_PH_TOUR_SEQ_GENERATOR")
 	private int tourSeq;
 	
 	@Column(nullable = false)

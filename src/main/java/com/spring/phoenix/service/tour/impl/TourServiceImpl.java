@@ -1,12 +1,17 @@
 package com.spring.phoenix.service.tour.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.phoenix.entitiy.Reserve;
+import com.spring.phoenix.entitiy.ReserveTourist;
 import com.spring.phoenix.entitiy.Tour;
 import com.spring.phoenix.entitiy.TourFile;
+import com.spring.phoenix.repository.ReserveRepository;
+import com.spring.phoenix.repository.ReserveTouristRopository;
 import com.spring.phoenix.repository.TourFileRepository;
 import com.spring.phoenix.repository.TourRepository;
 import com.spring.phoenix.service.tour.TourService;
@@ -18,6 +23,12 @@ public class TourServiceImpl implements TourService {
 	
 	@Autowired
 	TourFileRepository tourFileRepository;
+	
+	@Autowired
+	ReserveRepository reserveRepository;
+	
+	@Autowired
+	ReserveTouristRopository reserveTouristRepository;
 	
 	@Override
 	public int insertTour(Tour tour) {
@@ -60,4 +71,18 @@ public class TourServiceImpl implements TourService {
 			return fileList;
 		}
 	}
+
+	@Override
+	public void insertReservation(Reserve reserve) {
+		reserveRepository.save(reserve);
+	}
+	
+	@Override
+	public void insertTourist(List<ReserveTourist> list) {
+		for(ReserveTourist reserveTourist : list) {
+			reserveTourist.setTouristSeq(reserveTouristRepository.selectNextFileSeqByReserveReserveSeq(reserveTourist.getReserve().getReserveSeq()));
+			reserveTouristRepository.save(reserveTourist);
+		}
+	}
+	
 }

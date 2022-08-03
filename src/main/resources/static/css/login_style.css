@@ -29,7 +29,6 @@ hr {
 .TextTitle {
     font-size: 36px;
     font-weight: bold;
-    margin-top: 15px;
 }
 
 /*로그인 ul 수평정렬*/
@@ -71,7 +70,8 @@ hr {
 
 .login-form input[type="text"], .login-form input[type="password"] {
     border: 1px solid silver;
-    margin-top: 20px;
+    padding: 5px;
+    margin-bottom: 20px;
     width: 100%;  
 }
 
@@ -101,7 +101,7 @@ hr {
 
 .form_holder {
     text-align: left;
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 
@@ -112,7 +112,7 @@ hr {
     color: #ffffff;
     border: none;
     border-radius: 5px;
-    margin-top: 30px;
+    margin-top: 23px;
     padding: 5px 25px;
     vertical-align: left;
 }
@@ -126,7 +126,7 @@ hr {
 .register-submit {
     background-color: #E0E0E0;
     border-radius: 5px;
-    margin-top: 30px;
+    margin-top: 23px;
     height: 35px;
     padding: 5px 25px;
     
