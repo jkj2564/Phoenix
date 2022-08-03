@@ -11,7 +11,7 @@ public class NoticeController {
 	@GetMapping("/notice")
 	public ModelAndView eventView() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("notice/notice.html");
+		mv.setViewName("notice/notice.html"); 
 		
 		return mv;
 	}
