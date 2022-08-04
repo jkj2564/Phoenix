@@ -35,11 +35,19 @@ public class TourController {
 	@Autowired
 	TourService tourService;
 
-	@GetMapping("tourInfo")
-	public ModelAndView tourInfoView() {
+	@GetMapping("/tourInfo")
+	public ModelAndView tourInfoView(Tour tour) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("tour/tourInfo.html");
-
+		
+//		if(tour.getSearchCondition() != null && !tour.getSearchCondition().equals("")) {
+//			mv.addObject("searchCondition", tour.getSearchCondition());
+//		}
+//		
+//		if(tour.getSearchKeyword() != null && !tour.getSearchKeyword().equals("")) {
+//			mv.addObject("searchKeyword", tour.getSearchKeyword());
+//		}
+		
 		List<Tour> tourList = tourService.tourInfo();
 		mv.addObject("tourList", tourList);
 
@@ -96,33 +104,71 @@ public class TourController {
 
 	@PostMapping("/reservation")
 	public void reservation(@RequestParam Map<String, String> paramMap)
-			throws JsonMappingException, JsonProcessingException {
-		// Reserve reserve = (Reserve)paramMap.get("formData");
-		System.out.println(paramMap);
-		System.out.println(paramMap.get("rName"));
-		System.out.println(paramMap.get("list"));
-		String str = paramMap.get("list");
-
+			throws JsonMappingException, JsonProcessingException, IOException {	
+		
 		Reserve reserve = new Reserve();
-		reserve.setRName(paramMap.get("rName"));
-
+		Tour tour = new Tour();
+		tour.setTourSeq(Integer.parseInt(paramMap.get("tourSeq")));
+		reserve.setTour(tour);
+		reserve.setStartDate(paramMap.get("startDate"));
+		reserve.setEndDate(paramMap.get("endDate"));
+		reserve.setRUserName(paramMap.get("rUserName"));
+		reserve.setRUserEmail(paramMap.get("rUserEmail"));
+		reserve.setRUserBirth(paramMap.get("rUserBirth"));
+		reserve.setRUserTel(paramMap.get("rUserTel"));
+		reserve.setRAdult(Integer.parseInt(paramMap.get("rAdult")));
+		reserve.setRChild(Integer.parseInt(paramMap.get("rChild")));
+		reserve.setRBaby(Integer.parseInt(paramMap.get("rBaby")));
+		reserve.setRPrice(Integer.parseInt(paramMap.get("rPrice")));
+		
 		tourService.insertReservation(reserve);
 
-		 List<ReserveTourist> tourList = new ArrayList<ReserveTourist>();
-		 
-			ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
-			ObjectMapper mapper = new ObjectMapper();
-			list = mapper.readValue(str, ArrayList.class);
+		List<ReserveTourist> tourList = new ArrayList<ReserveTourist>();
+		String str = paramMap.get("list");
+		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		ObjectMapper mapper = new ObjectMapper();
+		list = mapper.readValue(str, ArrayList.class);
 
-			for (int i = 0; i < list.size(); i++) {
-				ReserveTourist tour = new ReserveTourist();
-				tour.setReserve(reserve);
-				tour.setTName((String) list.get(i).get("name"));
-				tour.setTBirth((String) list.get(i).get("birth"));
-				tourList.add(tour);
-			}
+		for (int i = 0; i < list.size(); i++) {
+			ReserveTourist tourist = new ReserveTourist();
+			tourist.setReserve(reserve);
+			tourist.setTName((String) list.get(i).get("name"));
+			tourist.setTBirth((String) list.get(i).get("birth"));
+			tourist.setTGender((String) list.get(i).get("gender"));
+			tourist.setTEmail((String) list.get(i).get("email"));
+			tourist.setTTel((String) list.get(i).get("tel"));
+			tourist.setAge((String) list.get(i).get("age"));
+			tourList.add(tourist);
+		}
 
-			tourService.insertTourist(tourList);
+		tourService.insertTourist(tourList);
 
+	}
+	
+	@GetMapping("/tourlist")
+	public ModelAndView tourlist() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("tour/tourlist.html");
+		
+		List<Tour> tourList = tourService.tourList();
+		mv.addObject("tourList", tourList);
+		return mv;
+	}
+	
+	@GetMapping("/deleteTour/{tourSeq}")
+	public void deleteTour(@PathVariable int tourSeq, HttpServletResponse response) throws IOException {
+		tourService.deleteTour(tourSeq);
+		
+		response.sendRedirect("/tour/tourlist");
+	}
+	
+	@GetMapping("/tourReservationList")
+	public ModelAndView tourReservationList() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/tour/tourReservationList.html");
+		
+		List<Reserve> rList = tourService.tourReservationList();
+		mv.addObject("rList", rList);
+		return mv;
 	}
 }

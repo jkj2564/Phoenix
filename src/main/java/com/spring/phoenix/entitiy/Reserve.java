@@ -37,7 +37,7 @@ public class Reserve {
 	private String endDate;
 	
 
-	private String rName;
+	private String rUserName;
 	
 
 	private String rUserEmail;
