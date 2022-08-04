@@ -84,6 +84,7 @@ input:focus, textarea:focus, select:focus {
 #tourPackage {
 	width: 40%;
 	border: 1px solid #BDBDBD;
+	-webkit-appearance: auto;
 }
 
 textarea {

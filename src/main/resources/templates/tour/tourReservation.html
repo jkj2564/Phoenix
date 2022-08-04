@@ -10,7 +10,7 @@
 			<link rel="stylesheet" th:href="@{/css/reservation_style.css}">
 		</th:block>
 		<th:block layout:fragment="script">
-			<script>
+			<script th:inline="javascript">
 				$(function() {
 					AsumPrice($(".price-adult-count-sum").text());
 					CsumPrice($(".price-child-count-sum").text());
@@ -31,22 +31,14 @@
 					
 					for(var i = 1; i <= $(".price-child-count-sum").text(); i++) {
 		                $(".child-div").append("<div class='child-div-" 
-		                						+ i 
-		                						+ "'><p class='TextMidTitle mid-top-margin input-child'>아동" 
-		                						+ i 
-		                						+ "</p><table class='table-2 client-info'><tr><th>이름</th><td><input type='text' class='input-info' id='user_id_child_" 
-		                						+ i 
-		                						+ "'placeholder='ex.홍길동' required></td></tr><tr><th>생년월일</th><td><input type='text' class='input-info' id='user_birthday_child_" 
-		                						+ i 
-		                						+ "' placeholder='ex.1991231' required></td><th>성별</th><td><div class='radio-info'><input type='radio' name='gender_child"
-		                						+ i 
-		                						+"' value='M' id='user_gender_chlid_" 
-		                						+ i 
-		                						+"' required>남자&nbsp;&nbsp;&nbsp;<input type='radio' name='gender_child"
-		                						+ i 
-		                						+"' value='F' id='user_gender_chlid_"
-		                						+ i  
-		                						+"' required>여자</div></td></tr></table>");
+		                						+ i + "'><p class='TextMidTitle mid-top-margin input-child'>아동" 
+		                						+ i + "</p><table class='table-2 client-info'><tr><th>이름</th><td><input type='text' class='input-info' id='user_id_child_" 
+		                						+ i + "'placeholder='ex.홍길동' required></td></tr><tr><th>생년월일</th><td><input type='text' class='input-info' id='user_birthday_child_" 
+		                						+ i + "' placeholder='ex.1991231' required></td><th>성별</th><td><div class='radio-info'><input type='radio' name='gender_child"
+		                						+ i +"' value='M' id='user_gender_child_" 
+		                						+ i +"' required>남자&nbsp;&nbsp;&nbsp;<input type='radio' name='gender_child"
+		                						+ i +"' value='F' id='user_gender_child_"
+		                						+ i +"' required>여자</div></td></tr></table>");
 					}					
 
 					// plus minus 버튼 클릭시 숫자 변경
@@ -92,9 +84,9 @@
 		                						+ num + "</p><table class='table-2 client-info'><tr><th>이름</th><td><input type='text' class='input-info' id='user_id_child_" 
 		                						+ num + "'placeholder='ex.홍길동' required></td></tr><tr><th>생년월일</th><td><input type='text' class='input-info' id='user_birthday_child_" 
 		                						+ num + "' placeholder='ex.1991231' required></td><th>성별</th><td><div class='radio-info'><input type='radio' name='gender_child"
-		                						+ num +"' value='M' id='user_gender_chlid_"
+		                						+ num +"' value='M' id='user_gender_child_"
 		                						+ num +"' required>남자&nbsp;&nbsp;&nbsp;<input type='radio' name='gender_child"
-		                						+ num +"' value='F' id='user_gender_chlid_"
+		                						+ num +"' value='F' id='user_gender_child_"
 		                						+ num +"' required>여자</div></td></tr></table>");
 		            });
 		
@@ -159,25 +151,83 @@
 		            
 		            //예약버튼 클릭 시
 		            $("#reservation").on("click", function() {
+						for(let i = 1; i <= parseInt($(".sum-adult").text()); i++) {
+							if($("#user_id_adult_" + i).val() == null || $("#user_id_adult_" + i).val() == "") {
+								alert("이름을 입력하세요.");
+								$("#user_id_adult_" + i).focus();
+								return;
+							} else if($("#user_birthday_adult_" + i).val() == null || $("#user_birthday_adult_" + i).val() == "") {
+								alert("생년월일을 입력하세요.");
+								$("#user_birthday_adult_" + i).focus();
+								return;
+							} else if($("#user_gender_adult_" + i).val() == null || $("#user_gender_adult_" + i).val() == "") {
+								alert("성별을 입력하세요.");
+								$("#user_gender_adult_" + i).focus();
+								return;
+							} else {
+								return;
+							}
+						}
+						
+						for(let i = 1; i <= parseInt($(".sum-child").text()); i++) {
+							if($("#user_id_child_" + i).val() == null || $("#user_id_child_" + i).val() == "") {
+								alert("이름을 입력하세요.");
+								$("#user_id_child_" + i).focus();
+								return;
+							} else if($("#user_birthday_child_" + i).val() == null || $("#user_birthday_child_" + i).val() == "") {
+								alert("생일을 입력하세요.");
+								$("#user_birthday_child_" + i).focus();
+								return;
+							} else if($("#user_gender_child_" + i).val() == null || $("#user_gender_child_" + i).val() == "") {
+								alert("성별을 입력하세요.");
+								$("#user_gender_child_" + i).focus();
+								return;
+							} else {
+								return;
+							}
+						}
+						
 						const list = [];
 						
 						for(let i = 1; i <= parseInt($(".sum-adult").text()); i++) {
 							const obj = {
 								name: $("#user_id_adult_" + i).val(),
 								birth: $("#user_birthday_adult_" + i).val(),
+								gender: $("#user_gender_adult_" + i).val(),
+								email: $("#user_email_adult_" + i).val(),
+								tel: $("#user_tel_adult_" + i).val(),
+								age: '성인',
 							};
 							list.push(obj);
 						}
 						
 						for(let i = 1; i <= parseInt($(".sum-child").text()); i++) {
 							const obj = {
-								name: $("#user_id_child" + i).val(),
-								birth: $("#user_birthday_child" + i).val(),
+								name: $("#user_id_child_" + i).val(),
+								birth: $("#user_birthday_child_" + i).val(),
+								gender: $("#user_gender_child_" + i).val(),
+								age: '아동',
 							};
 							list.push(obj);
 						}
 						
-						const formData = new FormData($("#reservationForm")[0]);						
+						const formData = new FormData($("#reservationForm")[0]);
+						
+						/*<[CDATA[*/
+						const tourSeq = /*[[${reserve.tour.tourSeq}]]*/;
+						const startDate = /*[[${reserve.startDate}]]*/;
+						const endDate = /*[[${reserve.endDate}]]*/;
+						/*]]>*/
+						
+						formData.append("tourSeq", tourSeq);
+						formData.append("startDate", startDate);
+						formData.append("endDate", endDate);
+						formData.append("rAdult", $(".price-adult-count-sum").text());
+						formData.append("rChild", $(".price-child-count-sum").text());
+						formData.append("rBaby", $(".price-baby-count-sum").text());
+						formData.append("rPrice", $.withoutCommas($('.price-sum').text()));
+						
+											
 						formData.append("list", JSON.stringify(list));
 						
 						$.ajax({
@@ -185,7 +235,10 @@
 							type: 'post',
 							processData: false,
     						contentType: false,
-							data: formData
+							data: formData,
+							success: function() {
+								location.href = "/tour/tourInfo";
+							}
 						})
 					});
 		
@@ -288,7 +341,7 @@
 					<table class="table-2 client-info">
 						<tr>
 							<th>이름</th>
-							<td><input type="text" class="input-info" id="user_id_00" name="rName" placeholder="ex.홍길동" value="홍길동" required></td>
+							<td><input type="text" class="input-info" id="user_id_00" name="rUserName" placeholder="ex.홍길동" value="홍길동" required></td>
 							<th>이메일</th>
 							<td><input type="email" class="input-info" id="user_email_00" name="rUserEmail" value="Hong@naver.com" placeholder="ex.Hong@naver.com"
 								required></td>
