@@ -3,6 +3,7 @@ package com.spring.phoenix.controller.user;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,18 @@ import com.spring.phoenix.service.user.UserService;
 public class UserController {
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	@GetMapping("/login")
+	public ModelAndView loginView() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("user/login.html");
+		
+		return mv;
+
+	}
 	
 	@GetMapping("/join")
 	public ModelAndView joinView() {
@@ -33,7 +46,7 @@ public class UserController {
 		
 		String pw = user.getUserPw();
 		
-		user.setUserPw(pw);
+		user.setUserPw(passwordEncoder.encode(pw));
 		
 		userService.join(user);
 		
@@ -51,21 +64,32 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/login")
-	public ModelAndView loginView() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/login.html");
+	@PostMapping("/login")
+	public String login(User user, HttpSession session) {
+		User loginUser = userService.idCheck(user.getUserId());
 		
-		return mv;
+		if(loginUser == null) {
+			return "idFail";
+		} else {
+			if(!loginUser.getUserPw().equals(user.getUserPw())) {
+				return "pwFail";
+			}else {
+				session.setAttribute("loginUser", loginUser);
+				
+				return "loginSuccess";
+			}
+		}
+	}
+		
+		@GetMapping("/logout")
+		public ModelAndView logout(HttpSession session) {
+			session.invalidate();
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("mainPage.html");
+			
+			return mv;
+		
 	}
 	
-	@GetMapping("/logout")
-	public ModelAndView logout(HttpSession session) {
-		session.invalidate();
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/login.html");
-		
-		return mv;
-	}
-
+	
 }

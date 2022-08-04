@@ -23,7 +23,7 @@ public class FileUtils {
 		// 서버의 루트 경로 가져오기
 		String rootPath = request.getSession().getServletContext().getRealPath("/");
 		
-		String attachPath = "/upload/";
+		String attachPath = "/upload/";    
 		
 		File directory = new File(rootPath + attachPath);
 		
