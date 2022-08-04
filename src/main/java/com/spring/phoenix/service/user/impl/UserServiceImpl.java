@@ -9,10 +9,11 @@ import com.spring.phoenix.service.user.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
+
 	@Autowired
 	UserRepository userRepository;
 	
-	@Override
+	@Override //오버라이드는 생략도 가능
 	public void join(User user) {
 		userRepository.save(user);
 	}
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
 	public User idCheck(String userId) {
 		if(userRepository.findById(userId).isPresent()) {
 			return userRepository.findById(userId).get();
-		} else {
+		}else {
 			return null;
 		}
 	}
