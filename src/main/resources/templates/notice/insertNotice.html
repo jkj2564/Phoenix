@@ -7,20 +7,20 @@
 		<meta charset="UTF-8">
 	  	<title>index</title>
 	  	<th:block layout:fragment="css">
-	  	  <link rel="stylesheet" th:href="@{/css/notice-style.css}">
+	  	  <link rel="stylesheet" th:href="@{/css/notice_style.css}">
 	  	</th:block>	
 	</head>
 	<body>
 		<header></header>
           <div layout:fragment="content">
             <div class="All-Wrapper-fix">
-            <form action="/notice/insertNotice" method="post">
+            <form action="/notice/insertNotice" method="post" enctype="multipart/form-data">
 		     <!--본문 부분-->
 		     <div class="txt-title">
 		        <div>
 		            <strong class="big-tit">
 		                <p>
-		                  <input type="text" name="noticeSubTitle" 
+		                  <input type="text" name="noticeSub" 
 		                         style="border: 2px solid black;"required>
 		                </p>
 		            </strong>
@@ -28,10 +28,10 @@
 		    </div>
              <div class="notice-board-wrap">
 			    <div class="nb-head">
-	               <span class="state">[<input type="text" name="noticeDiv" required>]</span>
+	               <span class="state"><input type="text" name="noticeDiv" required></span>
 	               <span class="tit">
 	                 <input type="text" name="noticeTitle" 
-	                        style="border: 2px solid black;" required>
+	                        style="border: 2px solid black; width:500px;" required>
 	               </span>
 	               <span class="date">
 	                 <input type="text" name="noticeWriter" th:value="${#authentication.principal.username}" readonly>
@@ -40,7 +40,8 @@
 		        
 		        <div class="nb-cont">
 		            <textarea name="noticeContent" style="border: 1px solid black;
-		                       width:1000px; height: 400px;"></textarea>
+		                       width:1000px; height: 400px;"
+		                       cols="2000" rows="100"></textarea>
 		        </div>
 			  </div>
 			  
@@ -50,6 +51,9 @@
 				    </button>				   
 				    <button type="button" class="btn-bd-cont">
 				        <a th:href="@{/notice/getNoticeList}">목록</a>
+				    </button>
+				    <button type="button" class="btn-bd-cont" id="btn1" style="width: 300px;">
+				       <input type="file" name="uploadFiles" multiple="multiple">
 				    </button>
 			  </div>
 			  

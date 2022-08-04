@@ -9,18 +9,33 @@
 	<body>
 	  	<header th:fragment="header">
 			<div class="container topMenu">
-	            <ul class="topNav">
-	                <li>
-	                    <a href="/user/login">로그인</a>
-	                </li>
-	                <li>
-	                    <a href="/user/join">회원가입</a>
-	                </li>
-	                <li>
-	                    <a href="">고객센터</a>
-	                </li>
-	            </ul>
-	        </div>
+		   <div sec:authorize="!isAuthenticated()" th:remove="tag">
+	          <ul class="topNav" style="margin-right: 90px;">
+	            <li>
+	                 <a href="/user/login">로그인</a>
+	            </li>
+	             <li>
+	                  <a href="/user/join">회원가입</a>
+	              </li>
+	              <li>
+	                 <a id="customer" href="">고객센터</a>
+	              </li>
+	          </ul>
+		   </div>
+		   <div sec:authorize="isAuthenticated()" th:remove="tag">
+	        <ul class="topNav" style="margin-right: 90px;">
+	            <li>
+	                 <a href="/user/mypage" sec:authentication="principal.username"></a>
+	            </li>
+	             <li>
+	                  <a href="/user/logout">로그아웃</a>
+	              </li>
+	              <li>
+	                 <a id="customer" href="">고객센터</a>
+	              </li>
+	          </ul>
+		   </div>
+      </div>
 	        <!--로고 부분-->
 	        <div class="container midMenu">
 	            <div class="fl">

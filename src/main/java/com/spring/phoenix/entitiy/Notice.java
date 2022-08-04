@@ -11,9 +11,23 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="T_PH_NOTICE")
+
+/*
+ * @SequenceGenerator( name="T_PH_NOTICE_SEQ_GENERATOR",
+ * sequenceName="T_PH_NOTICE_SEQ", initialValue=1, allocationSize=1 )
+ */
 public class Notice {
-    @Id
+	@Id
+    
+	
+	/*
+	 * @GeneratedValue(strategy = GenerationType.SEQUENCE, generator =
+	 * "T_PH_NOTICE_SEQ_GENERATOR")
+	 */
+	 
     private int noticeSeq;
+    
+    private String noticeSub;
     
     private String noticeDiv;
     
