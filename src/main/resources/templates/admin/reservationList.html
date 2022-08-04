@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+		<title>index</title>
+		<th:block layout:fragment="css">
+			<link rel="stylesheet" th:href="@{/css/notice_style.css}">
+		</th:block>
+		<th:block layout:fragment="script">
+			<script>
+		        $(function () {
+		            $(".btn-ad-pro1").on("click", function() {
+		                confirm("삭제하시겠습니까?");
+		            })
+		        });
+			</script>
+		</th:block>
+	</head>
+	<body>
+		<div layout:fragment="content" class="All-Wrapper" style="margin-top:20px">
+			<!--사이드바 부분-->
+			<div id="snb" class="snb">
+				<dl>
+					<dt class="sub-title">
+						<a href="">관리자</a>
+					</dt>
+					<dd>
+						<ul class="sub-menu">
+							<li><a href="/admin/tourList">상품 관리</a></li>
+							<li id="product"><a href="">예약 관리</a></li>
+						</ul>
+					</dd>
+				</dl>
+			</div>
+			<!--본문 부분-->
+			<div class="Contents-wrap.fix">
+				<div class="txt-title" style="margin-bottom: 20px;">
+					<strong class="big-tit">
+						<p>예약 관리</p>
+					</strong>
+				</div>
+
+				
+				<div>
+					<table border=1 class="tg">
+						<thead class="tb-head">
+							<tr>
+								<th class="tb-num">예약 번호</th>
+								<th class="tb-pro">이름</th>
+								<th class="tb-name">연락처</th>
+								<th class="tb-pri">입금현황</th>
+								<th class="tb-man" style="width:250px;">관리</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="rList : ${rList}">
+								<td th:text="${rList.reserveSeq}"></td>
+								<td th:text="${rList.rUserName}"></td>
+								<td th:text="${rList.rUserTel}"></td>
+								<td>입금대기</td>
+								<td class="tb-man">
+									<div class="ed-dl-wrap">
+										<span id="ed-dl-span">
+											<img th:src="@{/images/edit.png}" alt="수정" id="ed-dl">
+											<a href="Admin-reserve_ex.html">
+												<button type="button" class="btn-ad-pro">수정</button>
+											</a>
+										</span>
+										<a id="ed-dl-span1" th:href="@{/admin/deleteReservation/{reserveSeq} (reserveSeq=${rList.reserveSeq})}">
+											<img th:src="@{/images/delete.png}" alt="수정" id="ed-dl">
+											<button type="button" class="btn-ad-pro1">삭제</button>
+										</a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

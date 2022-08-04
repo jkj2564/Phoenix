@@ -85,19 +85,4 @@ public class TourServiceImpl implements TourService {
 			reserveTouristRepository.save(reserveTourist);
 		}
 	}
-	
-	@Override
-	public List<Tour> tourList() {
-		return tourRepository.findAll();
-	}
-	
-	@Override
-	public void deleteTour(int tourSeq) {
-		tourRepository.deleteById(tourSeq);
-	}
-	
-	@Override
-	public List<Reserve> tourReservationList() {
-		return reserveRepository.findAll();
-	}
 }

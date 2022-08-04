@@ -164,8 +164,6 @@
 								alert("성별을 입력하세요.");
 								$("#user_gender_adult_" + i).focus();
 								return;
-							} else {
-								return;
 							}
 						}
 						
@@ -181,8 +179,6 @@
 							} else if($("#user_gender_child_" + i).val() == null || $("#user_gender_child_" + i).val() == "") {
 								alert("성별을 입력하세요.");
 								$("#user_gender_child_" + i).focus();
-								return;
-							} else {
 								return;
 							}
 						}
@@ -237,16 +233,13 @@
     						contentType: false,
 							data: formData,
 							success: function() {
+								alert('예약이 완료되었습니다.');
 								location.href = "/tour/tourInfo";
 							}
 						})
 					});
 		
 		        });
-		
-		        function submitAlert() {
-		            alert('예약이 완료되었습니다.');
-		        }
 		
 		
 		        // 성인 총 금액

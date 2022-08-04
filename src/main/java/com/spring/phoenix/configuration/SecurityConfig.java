@@ -49,7 +49,9 @@ public class SecurityConfig {
     	                             .antMatchers("/mapper/**").permitAll()
     	                             .antMatchers("/upload/**").permitAll()
     	                             .antMatchers("/images/**").permitAll()
+    	                             .antMatchers("/tour/**").permitAll()
     	                             .antMatchers("/notice/**").permitAll()
+    	                             .antMatchers("/admin/**").permitAll()
     	                             .antMatchers("/event/**").permitAll()
     	                             
     	                             .anyRequest().authenticated();
