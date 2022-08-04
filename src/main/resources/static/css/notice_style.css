@@ -14,6 +14,19 @@ a {
     text-decoration: none;
 }
 
+/*추가버튼*/
+#insertBtn {
+    background-color: #E0E0E0;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 20px;
+	margin-left: auto;
+	margin-bottom: 9px;
+	margin-right: 5px;
+    display: block;
+}
+
 
 /*2. 본문*/
 .All-Wrapper {

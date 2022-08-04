@@ -144,31 +144,4 @@ public class TourController {
 		tourService.insertTourist(tourList);
 
 	}
-	
-	@GetMapping("/tourlist")
-	public ModelAndView tourlist() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("tour/tourlist.html");
-		
-		List<Tour> tourList = tourService.tourList();
-		mv.addObject("tourList", tourList);
-		return mv;
-	}
-	
-	@GetMapping("/deleteTour/{tourSeq}")
-	public void deleteTour(@PathVariable int tourSeq, HttpServletResponse response) throws IOException {
-		tourService.deleteTour(tourSeq);
-		
-		response.sendRedirect("/tour/tourlist");
-	}
-	
-	@GetMapping("/tourReservationList")
-	public ModelAndView tourReservationList() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/tour/tourReservationList.html");
-		
-		List<Reserve> rList = tourService.tourReservationList();
-		mv.addObject("rList", rList);
-		return mv;
-	}
 }
