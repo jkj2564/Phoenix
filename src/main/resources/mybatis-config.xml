@@ -13,7 +13,7 @@
 		<setting name="jdbcTypeForNull" value="NULL"></setting>
 	</settings>
 	
-	<typeAliases>
+	<!-- <typeAliases>
 		<typeAlias type="com.spring.phoenix.dto.NoticeDTO" alias="notice"></typeAlias>		
-	</typeAliases>
+	</typeAliases> -->
 </configuration>
