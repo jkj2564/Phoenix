@@ -26,11 +26,5 @@ public interface TourService {
 	void insertReservation(Reserve reserve);
 	
 	void insertTourist(List<ReserveTourist> list);
-	
-	List<Tour> tourList();
-	
-	void deleteTour(int tourSeq);
-	
-	List<Reserve> tourReservationList();
 		
 }
