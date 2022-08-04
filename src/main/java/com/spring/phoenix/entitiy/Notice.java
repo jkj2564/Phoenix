@@ -3,6 +3,8 @@ package com.spring.phoenix.entitiy;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,8 +14,11 @@ import lombok.Data;
 @Data
 @Table(name="T_PH_NOTICE")
 public class Notice {
-    @Id
+	@Id
+    
     private int noticeSeq;
+    
+    private String noticeSubtitle;
     
     private String noticeDiv;
     

@@ -80,32 +80,31 @@
 			            </div>
 			            <div>
 			                <table border=1 class="tg">
-			                    <thead class="tb-head">
-			                        <tr>
+			                        <tr class="tb-head">
 			                            <th class="tb-num">번호</th>
 			                            <th class="tb-div">구분</th>
 			                            <th class="tb-tit">제목</th>
 			                            <th class="tb-dat">등록일</th>
 			                        </tr>
-			                    </thead>
-			                    <tbody>
-			                        <tr>
+			                        
+			                        <!--<tr>
 			                            <td class="tb-sub-sum">10</td>
 			                            <td>서비스</td>
 			                            <td class="tb-sub-tit" style="cursor:pointer;">
 			                              <a th:href="@{/notice/getNotice}">시스템 점검에 따른 이용제한 안내</a>
 			                            </td>
 			                            <td class="tb-sub-dat">2022-06-17</td>
-			                        </tr>
-			                        <tr th:each="board : ${boardList}">
+			                        </tr>-->
+			                       
+			                        <tr th:each="notice: ${noticeList}">
 			                           <td th:text="${notice.noticeSeq}"></td>
 			                           <td th:text="${notice.noticeDiv}"></td>
 			                           <td>
-			                             <a th:text="${notice.noticeTitle}"></a>
+			                             <a th:href="@{/notice/getNotice/{noticeSeq} (noticeSeq=${notice.noticeSeq})}"
+			                                th:text="${notice.noticeTitle}"></a>
 			                           </td>
 			                           <td th:text="${#temporals.format(notice.noticeRegdate, 'yyyy-MM-dd')}"></td>
 			                        </tr>
-			                    </tbody>
 			                </table>
 			                <div style="display:flex; justify-content: center;">
 			                <nav aria-label="Page navigation example">

@@ -20,7 +20,7 @@
 		        <div>
 		            <strong class="big-tit">
 		                <p>
-		                  <input type="text" name="noticeSubTitle" 
+		                  <input type="text" name="noticeSubtitle" 
 		                         style="border: 2px solid black;"required>
 		                </p>
 		            </strong>
@@ -28,10 +28,10 @@
 		    </div>
              <div class="notice-board-wrap">
 			    <div class="nb-head">
-	               <span class="state">[<input type="text" name="noticeDiv" required>]</span>
+	               <span class="state"><input type="text" name="noticeDiv" required></span>
 	               <span class="tit">
 	                 <input type="text" name="noticeTitle" 
-	                        style="border: 2px solid black;" required>
+	                        style="border: 2px solid black; width:500px;" required>
 	               </span>
 	               <span class="date">
 	                 <input type="text" name="noticeWriter" th:value="${#authentication.principal.username}" readonly>
