@@ -85,7 +85,7 @@ public class UserController {
 		public ModelAndView logout(HttpSession session) {
 			session.invalidate();
 			ModelAndView mv = new ModelAndView();
-			mv.setViewName("index.html");
+			mv.setViewName("mainPage.html");
 			
 			return mv;
 		
