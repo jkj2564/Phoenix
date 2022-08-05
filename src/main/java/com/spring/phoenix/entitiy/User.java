@@ -35,6 +35,8 @@ public class User {
 	@Column(nullable=false)
 	private String userNm;
 	
+	private String userBd;
+	
 	private String userGen;
 	
 	private String userTel;
@@ -59,7 +61,6 @@ public class User {
 	@Transient
 	private String userAddress;
 	
-	@Transient
-	private String userBd;
+
 	
 }
