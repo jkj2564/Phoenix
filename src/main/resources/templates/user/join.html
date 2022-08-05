@@ -3,15 +3,16 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layouts/layout}">
-	<head>
-		<meta charset="UTF-8">
-		<title>index</title>
-		<th:block layout:fragment="css">
-			<link rel="stylesheet" th:href="@{/css/join_style.css}">
-		</th:block>
-		<th:block layout:fragment="script">
-			<script>
-				$(function() {
+	 
+	 <head>
+	 	<meta charset="UTF-8">
+	 	<title>join</title>
+	 	<th:block layout:fragment="css">
+	 		<link rel="stylesheet" th:href="@{/css/J_style.css}">
+	 	</th:block>
+	 	<th:block layout:fragment="script">
+	 		<script>
+			 	$(function() {
 					//id 중복체크가 됐는지 확인하는 변수
 					let checkId = false;
 					let pwValidation = false;
@@ -22,7 +23,7 @@
 					
 					//아이디 중복 체크
 					$("#btnIdCheck").on("click", function() {
-						if($(".userId").val() == null || $(".userId").val() == '') {
+						if($("#userId").val() == null || $("#userId").val() == '') {
 							alert("아이디를 입력하세요.");
 							return;
 						}
@@ -32,15 +33,16 @@
 							type: 'post',
 							data: $("#joinForm").serialize(),
 							success: function(obj) {
+								console.log(obj);
 								if(obj === "idOk") {
-									if(confirm("사용가능한 아이디입니다. " + $(".userId").val() + "를(을) 사용하시겠습니까?")) {
+									if(confirm("사용가능한 아이디입니다. " + $("#userId").val() + "를(을) 사용하시겠습니까?")) {
 										checkId = true;
 										$("#btnIdCheck").attr("disabled", true);
 									}
 								} else {
 									checkId = false;
 									alert("이미 존재하는 아이디입니다.");
-									$(".userId").focus();
+									$("#userId").focus();
 									return;
 								}
 							},
@@ -50,7 +52,7 @@
 						});
 					});
 					
-					$(".userId").on("change", function() {
+					$("#userId").on("change", function() {
 						checkId = false;
 						$("#btnIdCheck").attr("disabled", false);
 					});
@@ -60,17 +62,17 @@
 						return /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{9,}$/.test(character);
 					}
 					
-					$(".userPw").on("change", function() {
-						if(!validatePassword($(".userPw").val())) {
+					$("#userPw").on("change", function() {
+						if(!validatePassword($("#userPw").val())) {
 							pwValidation = false;
 							$("#pwValidation").show();
-							$(".userPw").focus();
+							$("#userPw").focus();
 						} else {
 							pwValidation = true;
 							$("#pwValidation").hide();
 						}
 						
-						if($(".userPw").val() == $(".userPwCheck").val()) {
+						if($("#userPw").val() == $("#userPwCheck").val()) {
 							pwCheck = true;
 							$("#pwCheckResult").css("color", "green");
 							$("#pwCheckResult").text("비밀번호가 일치합니다.");
@@ -82,10 +84,10 @@
 					});
 					
 					//비밀번호 확인
-					$(".userPwCheck").on("change", function() {
+					$("#userPwCheck").on("change", function() {
 						$("#pwCheckResult").show();
 						
-						if($(".userPw").val() == $(".userPwCheck").val()) {
+						if($("#userPw").val() == $("#userPwCheck").val()) {
 							pwCheck = true;
 							$("#pwCheckResult").css("color", "green");
 							$("#pwCheckResult").text("비밀번호가 일치합니다.");
@@ -100,149 +102,156 @@
 					$("#joinForm").on("submit", function(e) {
 						if(!checkId) {
 							alert("아이디 중복체크를 진행해주세요.");
-							$(".userId").focus();
+							$("#userId").focus();
 							e.preventDefault();
 							return;
 						}
 						
 						if(!pwValidation) {
 							alert("비밀번호는 영문자, 숫자, 특수문자 조합의 9자리 이상으로 설정해주세요.");
-							$(".userPw").focus();
+							$("#userPw").focus();
 							e.preventDefault();
 							return;
 						}
 						
 						if(!pwCheck) {
 							alert("비밀번호가 일치하지 않습니다.");
-							$(".userPwCheck").focus();
+							$("#userPwCheck").focus();
 							e.preventDefault();
 							return;
 						}
 					});
 				});
 			</script>
-		</th:block>
-	</head>
-	<body>
-		<div layout:fragment="content" class="container contetnt">
-	        <p class="TextTitle">회원가입</p>
-	        <hr/>
-	        <form id="joinForm" action="/user/join" method="post">
-	            <table class ="join-table">
-	                <tr>
-	                    <th class ="th">아이디</th>
-	                    <td class ="td">
-	                    	<input class="userId" type="text" id="input" name="userId" required autofocus placeholder="아이디" style="width: 250px;">
-	                    	<button type="button" id="btnIdCheck" style="width: 70px; height: 30px; border-radius: 5px; border: none; background: #E0E0E0; margin-left: 5px; font-size: 14px;">중복확인</button>
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <th class ="th">비밀번호</th>
-	                    <td class ="td">
-	                    	<input class="userPw" type="password" id="input" name="userPw" required placeholder="비밀번호">
-	                    	<p id="pwValidation" style="color: red; font-size: 14px; margin-left: 14px;">비밀번호는 영문자, 숫자, 특수문자 조합의 9자리 이상으로 설정해주세요.</p>
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <th class ="th">비밀번호 확인</th>
-	                    <td class ="td">
-	                    	<input class="userPwCheck" type="password" id="input" name="userPwCheck" required placeholder="비밀번호 확인">
-	                    	<p id="pwCheckResult" style="font-size: 14px; margin-left: 14px;"></p>
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <th class ="th">이름</th>
-	                    <td class ="td">
-	                    	<input class="userNm" type="text" id="input" name="userNm" required placeholder="이름">
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <th class ="th">생년월일</th>
-	                    <td class ="td">
-	                    	<input class="userBir" type="date" id="input" name="userBirth">
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <th class ="th">성별</th>
-	                    <td class ="td">
-	                        <label>
-	                            <input type="radio" name="userGender" id="span" value="M">
-	                            <span>남자</span>
-	                        </label>
-	                        <label>
-	                            <input type="radio" name="userGender" id="span" value="F">
-	                            <span>여자</span>
-	                        </label>
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <th class ="th">휴대전화</th>
-	                    <td class ="td">
-	                    	<input class="userTel" type="tel" id="input" name="userTel" required placeholder=" 000-0000-0000">
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <th class ="th">이메일</th>
-	                    <td class ="td">
-	                    	<input class="userMail" type="email" id="input" name="userMail" placeholder=" 이메일">
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <th class ="th">관심분야 1</th>
-	                    <td class ="td">
-	                        <label>
-	                            <input type="radio" name="need1" value="family" checked>
-	                            <span >가족과 함께</span>
-	                        </label>
-	                        <label>
-	                            <input type="radio" name="need1" value="couple">
-	                            <span >연인과 함께</span>
-	                        </label>
-	                        <label>
-	                            <input type="radio" name="need1" value="pet">
-	                            <span>반려견과 함께</span>
-	                        </label>
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <th class ="th">관심분야 2</th>
-	                    <td class ="td">
-	                        <label>
-	                            <input type="radio" name="need2" value="family">
-	                            <span >가족과 함께</span>
-	                        </label>
-	                        <label>
-	                            <input type="radio" name="need2" value="couple" checked>
-	                            <span >연인과 함께</span>
-	                        </label>
-	                        <label>
-	                            <input type="radio" name="need2" value="pet">
-	                            <span>반려견과 함께</span>
-	                        </label>
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <th class ="th">관심분야 3</th>
-	                    <td class ="td">
-	                        <label>
-	                            <input type="radio" name="need3" value="family">
-	                            <span >가족과 함께</span>
-	                        </label>
-	                        <label>
-	                            <input type="radio" name="need3" value="couple">
-	                            <span >연인과 함께</span>
-	                        </label>
-	                        <label>
-	                            <input type="radio" name="need3" value="pet" checked>
-	                            <span>반려견과 함께</span>
-	                        </label>
-	                    </td>
-	                </tr>
-	            </table>
-	            <button type="submit" id="btn5">가입완료</button>
-	        </form>
-	        <br/>
-	        <br/>
+	 	</th:block>
+	 </head>
+	 <body>
+	 	<header></header>
+	 	 <div layout:fragment="content" class="form-wrapper">
+			<form id="joinForm" action="/user/join" method="post">
+				<div class="container">
+			        <br><br>
+			        <p id="signup">회원가입</p>
+			        <br>
+			        <hr>
+			        <br>
+			        <form action="">
+			            <table class ="table" border="2">
+			    
+			                <tr>
+			                    <th class ="th"><br>아이디</th>
+			                      <td class ="td">
+			                        <input type="text" class="input" id="userId" name="userId" reqired autofocus placeholder=" 아이디">
+			                        <button type="button" id="btnIdCheck" style="width: 80px; border: 1px solid lightgray;
+			                                                                     height: 40px; border-radius: 10px;">중복체크</button> 
+			                                                                     
+			                      </td>
+			                </tr>
+			                <tr>
+			                    <th class ="th"><br>비밀번호</th>
+			                    <td class ="td">
+			                       <input type="password" class="input" id="userPw" name="userPw" reqired placeholder=" 비밀번호">
+			                       <p id="pwValidation" style="color: red; font-size: 0.8rem">비밀번호는 영문자, 숫자, 특수문자 조합의 9자리 이상으로 설정해주세요.</p>
+			                    </td>
+			                </tr>
+			                <tr>
+			                    <th class ="th"><br>비밀번호 재확인</th>
+			                    <td class ="td">
+			                      <input type="password" class="input" id="userPwCheck" name="userPwCheck" reqired placeholder=" 비밀번호 재확인">
+			                      <p id="pwCheckResult" style="font-size: 0.8rem"></p>
+			                    </td>
+			                </tr>
+			                <tr>
+			                    <th class ="th"><br>이름</th>
+			                    <td class ="td"><input type="text" class="input" id=" userNm" name="userNm" reqired placeholder=" 이름"></td>
+			                </tr>
+			                <tr>
+			                    <th class ="th"><br>생년월일</th>
+			                    <td class ="td"><input type="date" class="input" id="userBd" name="userBd"></td>
+			                </tr>
+			                <tr>
+			                    <th class ="th"><br>성별</th>
+			                    <td class ="td">
+			                        <label>
+			                            <br><input type="radio" name="sex" id="userGen"><span>남자</span>
+			                        </label>
+			                        <label>
+			                            <br><input type="radio" name="sex" id="userGen"><span>여자</span>
+			                        </label>
+			                    </td>
+			                </tr>
+			                <tr>
+			                    <th class ="th"><br>휴대전화</th>
+			                    <td class ="td"><input type="tel" class="input" id="userTel" name="userTel" reqired placeholder=" 000-0000-0000"></td>
+			                </tr>
+			                <tr>
+			                    <th class ="th"><br>이메일</th>
+			                    <td class ="td"><input type="email" class="input" id="userEmail" name="userEmail" placeholder=" 이메일"></td>
+			                </tr>
+			                <tr>
+			                    <th class ="th"><br>관심분야 1</th>
+			                    <td class ="td">
+			                        <label>
+			                            <input type="radio" name="userNeed1" checked>
+			                            <span >가족과 함께　</span>
+			                        </label>
+			                        <label>
+			                            <input type="radio" name="userNeed1">
+			                            <span >연인과 함께　</span>
+			                        </label>
+			                        <label>
+			                            <br><input type="radio" name="userNeed1" >
+			                            <span>반려견과 함께</span>
+			                        </label>
+			                    </td>
+			                </tr>
+			                <tr>
+			                    <th class ="th"><br>관심분야 2</th>
+			                    <td class ="td">
+			                        <label>
+			                            <input type="radio" name="userNeed2">
+			                            <span >가족과 함께　</span>
+			                        </label>
+			                        <label>
+			                            <input type="radio" name="userNeed2" checked>
+			                            <span >연인과 함께　</span>
+			                        </label>
+			                        <label>
+			                            <br><input type="radio" name="userNeed2" >
+			                            <span>반려견과 함께</span>
+			                        </label>
+			                    </td>
+			                </tr>
+			                <tr>
+			                    <th class ="th"><br>관심분야 3</th>
+			                    <td class ="td">
+			                        <label>
+			                            <input type="radio" name="userNeed3">
+			                            <span >가족과 함께　</span>
+			                        </label>
+			                        <label>
+			                            <input type="radio" name="userNeed3">
+			                            <span >연인과 함께　</span>
+			                        </label>
+			                        <label>
+			                            <br><input type="radio" name="userNeed3" checked>
+			                            <span>반려견과 함께</span>
+			                        </label>
+			                    </td>
+			                </tr>
+			            </table>
+			        </form>
+			    
+			    
+			        <br><br>
+			        <button type="submit" id="btn5">            
+			            <a style="color: #fff;">가입완료</a>
+			        </button>
+			        <br><br><br><br>
+			    </div>
+			</form>
 		</div>
-	</body>
+       
+	 	<footer></footer>
+	 </body>
 </html>

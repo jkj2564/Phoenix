@@ -9,27 +9,116 @@
 		<th:block layout:fragment="css">
 			<link rel="stylesheet" th:href="@{/css/login_style.css}">
 		</th:block>
-		<!--<th:block layout:fragment="script">
-			<script>
+		<th:block layout:fragment="script">
+			 	<script>
+				//로그인 시 아이디나 비밀번호가 틀렸을 경우를 대비하여 폼을 서브밋하지 않고 후 처리를 위해 ajax로 처리 
 				$(function() {
-					alert("hello spring boot");
+					$("#btnLogin").on("click",function() {
+						$.ajax({
+							url: '/user/login',
+							type: 'post',
+							data: $("#loginForm").serialize(),
+							success: function(obj) {
+								//1. 아이디 체크
+								if(obj === 'idFail') {
+									alert("존재하지 않는 아이디입니다.");
+									return;
+								} else if(obj === 'pwFail') {
+									//2. 비밀번호 체크 
+									alert("비밀번호가 틀렸습니다.");
+									return;
+								}
+								
+								//3. 로그인 처리 
+								location.href = "/";
+							},
+							error: function(e){
+								console.log(e);
+								}
+							});
+					});
+					
+				 	//회원가입 버튼 누르면 회원가입페이지로 이동하기 
+					$("#btnJoin").on("click",function() {
+                 		location.href = "/user/join";
+                    }); 
 				});
-
-			</script>
-		</th:block>-->
-	</head>
+				
+				  //아이디 기억하기 
+                    $(document).ready(function(){
+						var userInputId = getCookie("userInputId");
+						var setCookieYN = getCookie("setCookieYN");
+						
+						if(setCookieYN == 'Y'){
+							$("#idSaveCheck").prop("checked", true);
+						}else {
+							$("#idSaveCheck").prop("checked",false);
+						}
+						
+						$("#loginid").val(userInputId);
+						
+						//로그인 버튼 클릭 
+						$('#btnLogin').click(function(){
+							if($("#idSaveCheck").is(":checked")){
+								var userInputId = $("#loginid").val();
+								setCookie("userInputId",userInputId,60);
+								setCookie("setCookieYN","Y",60);
+							}else {
+								deleteCookie("userInputId");
+								deleteCookie("setCookieYN");
+							}
+							
+							document.fform.submit();
+						});
+					}); 
+					
+					//쿠키값 Set
+					function setCookie(cookieName, value, exdays){
+						var exdate = new Date();
+						exdate.setDate(exdate.getDate()+exdays);
+						var cookieValue = escape(value) + ((exdays == null) ? "" : "; expires=" +
+						exdate.toGMTString());
+						document.cookie = cookieName + "=" + cookieValue;
+					}
+					
+					//쿠키값 Delete
+					function deleteCookie(cookieName){
+						var expireDate = new Date();
+						expireDate.setDate(expireDate.getDate() -1);
+						document.cookie = cookieName + "="+ "; expires=" + expireDate.toGMTString();
+					}
+					
+					//쿠키값 가져오기 
+					function getCookie(cookie_name){
+						var x,y;
+						var val = document.cookie.split(';');
+						
+						for(var i =0; i< val.length; i++) {
+							x = val[i].substr(0,val[i].indexOf('='));
+							y = val[i].substr(val[i].indexOf('=')+1);
+							x = x.replace(/^\s+|\s+$/g,''); //앞과 뒤의 공백 제거 
+							
+							if(x == cookie_name){
+								return unescape(y); //unescape로 디코딩 후 값 리턴 
+							}
+						}
+					}
+				</script>
+	 		</th:block>
+	 </head>
 	<body>
 		<div layout:fragment="content" class="form-wrapper">
             <form class="login-form" action="/user/loginProc" method="post">
                 <p class="TextTitle">로그인</p>
                 <div class="id-input">
-                    <input class="required" type="text" name="userId" id="userId" placeholder="아이디" size="20" maxlength="20" required>
+                    <input class="required" type="text" name="userId" id="loginid" placeholder="아이디" size="20" maxlength="20" required>
                 </div>
                 <div class="pw-input">
                     <input class="required" type="password" name="userPw" id="userPw" placeholder="비밀번호" size="20" maxlength="20" required>
                 </div>
                 <div class="form_holder check">
-                    <input type="checkbox" id="chk_id"><label for="">아이디저장</label>
+                    <input type="checkbox" id="idSaveCheck">
+                    <label class="form-check-label" for="rememberMe"> 아이디저장</label>
                 </div>
                 <div class="form_holder check">
                     <input type="checkbox"><label for="">비밀번호저장</label>
@@ -58,7 +147,7 @@
                     <a href="#">비밀번호 찾기</a>
                 </div>    
                 <div class="register-submit" style="text-align: center;">
-                    <a href="/user/join.do" type="button" id="register" style="background: none; border: none; color: black;">회원가입</a>
+                    <input type="button" id="btnJoin" value="회원가입">
                 </div>
                 <div class="copywrite">
                  	<br>
