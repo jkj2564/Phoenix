@@ -23,7 +23,6 @@ public class ReserveTourist {
 	private Reserve reserve;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int touristSeq;
 	
 //	@Column(nullable = false)

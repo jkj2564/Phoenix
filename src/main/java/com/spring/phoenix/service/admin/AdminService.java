@@ -8,8 +8,6 @@ import com.spring.phoenix.entitiy.Tour;
 public interface AdminService {
 	List<Tour> tourList();
 	
-	void deleteTour(int tourSeq);
-	
 	List<Reserve> tourReservationList();
 	
 	void deleteReservaiton(int reserveSeq);

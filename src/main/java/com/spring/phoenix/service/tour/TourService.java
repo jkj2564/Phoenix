@@ -8,12 +8,13 @@ import com.spring.phoenix.entitiy.Reserve;
 import com.spring.phoenix.entitiy.ReserveTourist;
 import com.spring.phoenix.entitiy.Tour;
 import com.spring.phoenix.entitiy.TourFile;
+import com.spring.phoenix.entitiy.User;
 
 
 public interface TourService {
 	int insertTour(Tour tour);
 	
-	List<Tour> tourInfo();
+	List<Tour> tourInfo(Tour tour);
 	
 	List<TourFile> tourInfoFile();
 	
@@ -26,5 +27,7 @@ public interface TourService {
 	void insertReservation(Reserve reserve);
 	
 	void insertTourist(List<ReserveTourist> list);
+	
+	User reservationUserInfo(String userId);
 		
 }

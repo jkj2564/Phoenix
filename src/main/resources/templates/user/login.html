@@ -110,53 +110,56 @@
 	 <body>
 	 	<header></header>
 	 	<div layout:fragment="content" class="form-wrapper">
-            <form class="login-form" id="login-form" action="/user/loginProc" method="post">
-                <h2>로그인</h2>
-                <div class="id-input">
-                    <input class="required" type="text" name="userId" id="loginid" placeholder="아이디" size="20" maxlength="20" required>
-                </div>
-                <div class="pw-input">
-                    <input class="required" type="password" name="userPw" id="userPw" placeholder="비밀번호" size="20" maxlength="20" required>
-                </div>
-                <div class="form_holder check">
-                    <input type="checkbox" id="idSaveCheck">
-                    <label class="form-check-label" for="rememberMe"> 아이디저장</label>
-                </div>
-                <div class="form_holder check">
-                    <input type="checkbox" id=""><label for=""> 비밀번호저장</label>
-                </li>
-                <div class="login-submit" style="text-align: center;">
-                    <input type="submit" id="btnLogin" value="로그인">
-                </div>
-                <hr>
-                <div class="btn_wrap login_sns" style="text-align: center;">
-                    <a href="/oauth2/authorization/naver">
-                        <img th:src="@{/images/naver_login.png}" alt="네이버 로그인" width="30" height="30">
-                    </a>
-                    <a href="#" class="sns_f">
-                        <img th:src="@{/images/fb_login.png}" alt="페이스북 로그인" width="30" height="30">
-                    </a>
-                    <a href="/oauth2/authorization/kakao" class="sns_k">
-                        <img th:src="@{/images/kakao_login.png}" alt="카카오 로그인" width="30" height="30">
-                    </a>
-                    <a href="/oauth2/authorization/google" class="sns_g">
-                        <img th:src="@{/images/google_login.png}" alt="구글 로그인" width="30" height="30">
-                    </a>
-                        
-                </div>        
-                <div class="login-btn-wrap">
-                    <a href="#">아이디 찾기</a>
-                    <a href="#">비밀번호 찾기</a>
-                </div>    
-                <div class="register-submit" style="text-align: center;">
-                    <input type="button" id="btnJoin" value="회원가입">
-                </div>
-                <div class="copywrite">
-	                    All rights reserved <br>
-	                    Copyright (2022) Pheonix Tour
-	                </div>
-              </form>
-	 		</div>
+			<form class="login-form" id="login-form" action="/user/loginProc" method="post">
+				<h2 class="TextTitle" style="margin-bottom: 25px;">로그인</h2>
+				<div class="id-input">
+					<input class="required" type="text" name="userId" id="loginid" placeholder="아이디" size="20" maxlength="20"
+						required>
+				</div>
+				<div class="pw-input">
+					<input class="required" type="password" name="userPw" id="userPw" placeholder="비밀번호" size="20" maxlength="20"
+						required>
+				</div>
+				<div class="form_holder check">
+					<input type="checkbox" id="idSaveCheck">
+					<label class="form-check-label" for="rememberMe"> 아이디저장</label>
+				</div>
+				<div class="form_holder check">
+					<input type="checkbox" id=""><label for=""> 비밀번호저장</label>
+					</li>
+					<div class="login-submit" style="text-align: center;">
+						<input type="submit" id="btnLogin" value="로그인">
+					</div>
+					<hr>
+					<div class="btn_wrap login_sns" style="text-align: center;">
+						<a href="/oauth2/authorization/naver">
+							<img th:src="@{/images/naver_login.png}" alt="네이버 로그인" width="30" height="30">
+						</a>
+						<a href="#" class="sns_f">
+							<img th:src="@{/images/fb_login.png}" alt="페이스북 로그인" width="30" height="30">
+						</a>
+						<a href="/oauth2/authorization/kakao" class="sns_k">
+							<img th:src="@{/images/kakao_login.png}" alt="카카오 로그인" width="30" height="30">
+						</a>
+						<a href="/oauth2/authorization/google" class="sns_g">
+							<img th:src="@{/images/google_login.png}" alt="구글 로그인" width="30" height="30">
+						</a>
+			
+					</div>
+					<div class="login-btn-wrap">
+						<a href="#">아이디 찾기</a>
+						<a href="#">비밀번호 찾기</a>
+					</div>
+					<div class="register-submit" style="text-align: center;">
+						<input type="button" id="btnJoin" value="회원가입">
+					</div>
+					<div class="copywrite" style="margin-top: 9px;">
+						All rights reserved <br>
+						Copyright (2022) Pheonix Tour
+					</div>
+				</div>
+			</form>
+	 	</div>
 	 	<footer></footer>
 	 </body>
 </html>

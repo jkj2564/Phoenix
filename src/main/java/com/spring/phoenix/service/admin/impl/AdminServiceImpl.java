@@ -25,11 +25,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public void deleteTour(int tourSeq) {
-		tourRepository.deleteById(tourSeq);
-	}
-	
-	@Override
 	public List<Reserve> tourReservationList() {
 		return reserveRepository.findAll();
 	}
