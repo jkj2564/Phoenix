@@ -1,6 +1,7 @@
 package com.spring.phoenix.controller.tour;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,7 @@ import com.spring.phoenix.entitiy.Reserve;
 import com.spring.phoenix.entitiy.ReserveTourist;
 import com.spring.phoenix.entitiy.Tour;
 import com.spring.phoenix.entitiy.TourFile;
+import com.spring.phoenix.entitiy.User;
 import com.spring.phoenix.service.tour.TourService;
 
 @RestController
@@ -40,15 +42,15 @@ public class TourController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("tour/tourInfo.html");
 		
-//		if(tour.getSearchCondition() != null && !tour.getSearchCondition().equals("")) {
-//			mv.addObject("searchCondition", tour.getSearchCondition());
-//		}
-//		
-//		if(tour.getSearchKeyword() != null && !tour.getSearchKeyword().equals("")) {
-//			mv.addObject("searchKeyword", tour.getSearchKeyword());
-//		}
+		if(tour.getSearchCondition() != null && !tour.getSearchCondition().equals("")) {
+			mv.addObject("searchCondition", tour.getSearchCondition());
+		}
 		
-		List<Tour> tourList = tourService.tourInfo();
+		if(tour.getSearchKeyword() != null && !tour.getSearchKeyword().equals("")) {
+			mv.addObject("searchKeyword", tour.getSearchKeyword());
+		}
+		
+		List<Tour> tourList = tourService.tourInfo(tour);
 		mv.addObject("tourList", tourList);
 
 		List<TourFile> tourFileList = tourService.tourInfoFile();
@@ -93,10 +95,15 @@ public class TourController {
 	}
 
 	@GetMapping("/reservation")
-	public ModelAndView reservationView(Reserve reserve) {
+	public ModelAndView reservationView(Reserve reserve, Principal principal) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/tour/tourReservation.html");
-
+		
+		if(principal != null) {
+		User user = tourService.reservationUserInfo(principal.getName());
+		mv.addObject("user", user);
+		}
+		
 		mv.addObject("reserve", reserve);
 
 		return mv;

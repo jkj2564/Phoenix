@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko"
 	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layouts/layout}">
 	<head>
@@ -331,20 +332,36 @@
 			<form id="reservationForm" action="/user/mypage" onsubmit="submitAlert()">
 				<div class="div-top-margin">
 					<p class="TextSubTitle">예약자 정보</p>
-					<table class="table-2 client-info">
+					<table class="table-2 client-info" sec:authorize="!isAuthenticated()">
 						<tr>
 							<th>이름</th>
-							<td><input type="text" class="input-info" id="user_id_00" name="rUserName" placeholder="ex.홍길동" value="홍길동" required></td>
+							<td><input type="text" class="input-info" id="user_id_00" name="rUserName" placeholder="ex.홍길동" required></td>
 							<th>이메일</th>
-							<td><input type="email" class="input-info" id="user_email_00" name="rUserEmail" value="Hong@naver.com" placeholder="ex.Hong@naver.com"
+							<td><input type="email" class="input-info" id="user_email_00" name="rUserEmail" placeholder="ex.Hong@naver.com"
 								required></td>
 						</tr>
 						<tr>
 							<th>생년월일</th>
 							<td><input type="text" class="input-info"
-								id="user_birthday_00" placeholder="ex.1991231" name="rUserBirth" value="19911231" required></td>
+								id="user_birthday_00" placeholder="ex.1991231" name="rUserBirth"  required></td>
 							<th>휴대폰 번호</th>
-							<td><input type="tel" class="input-info" id="user_tel_00" name="rUserTel" value="010-1234-5678" placeholder="ex.010-1234-5678" required></td>
+							<td><input type="tel" class="input-info" id="user_tel_00" name="rUserTel" placeholder="ex.010-1234-5678" required></td>
+						</tr>
+					</table>
+					<table class="table-2 client-info" sec:authorize="isAuthenticated()">
+						<tr>
+							<th>이름</th>
+							<td><input type="text" class="input-info" id="user_id_00" name="rUserName" placeholder="ex.홍길동" th:value="${user.userNm}" required></td>
+							<th>이메일</th>
+							<td><input type="email" class="input-info" id="user_email_00" name="rUserEmail" th:value="${user.userEmail}" placeholder="ex.Hong@naver.com"
+								required></td>
+						</tr>
+						<tr>
+							<th>생년월일</th>
+							<td><input type="text" class="input-info"
+								id="user_birthday_00" placeholder="ex.1991231" name="rUserBirth"  required></td>
+							<th>휴대폰 번호</th>
+							<td><input type="tel" class="input-info" id="user_tel_00" name="rUserTel" th:value="${user.userTel}" placeholder="ex.010-1234-5678" required></td>
 						</tr>
 					</table>
 				</div>

@@ -31,14 +31,7 @@ public class AdminController {
 		mv.addObject("tourList", tourList);
 		return mv;
 	}
-	
-	@GetMapping("/deleteTour/{tourSeq}")
-	public void deleteTour(@PathVariable int tourSeq, HttpServletResponse response) throws IOException {
-		adminService.deleteTour(tourSeq);
 		
-		response.sendRedirect("/admin/tourlist");
-	}
-	
 	@GetMapping("/reservationList")
 	public ModelAndView reservationList() {
 		ModelAndView mv = new ModelAndView();
@@ -49,11 +42,11 @@ public class AdminController {
 		return mv;
 	}
 	
-	@GetMapping("/deleteResevation/{reserveSeq}")
-	public void deleteReservaiton(@PathVariable int reserveSeq, HttpServletResponse response) throws IOException {
+	@GetMapping("/deleteReservation/{reserveSeq}")
+	public void deleteReservation(@PathVariable int reserveSeq, HttpServletResponse response) throws IOException {
 		adminService.deleteReservaiton(reserveSeq);
 		
-		response.sendRedirect("/admin/ReservationList");
+		response.sendRedirect("/admin/reservationList");
 	}
 
 }

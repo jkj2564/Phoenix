@@ -10,10 +10,13 @@ import com.spring.phoenix.entitiy.Reserve;
 import com.spring.phoenix.entitiy.ReserveTourist;
 import com.spring.phoenix.entitiy.Tour;
 import com.spring.phoenix.entitiy.TourFile;
+import com.spring.phoenix.entitiy.User;
+import com.spring.phoenix.mapper.TourMapper;
 import com.spring.phoenix.repository.ReserveRepository;
 import com.spring.phoenix.repository.ReserveTouristRopository;
 import com.spring.phoenix.repository.TourFileRepository;
 import com.spring.phoenix.repository.TourRepository;
+import com.spring.phoenix.repository.UserRepository;
 import com.spring.phoenix.service.tour.TourService;
 
 @Service
@@ -30,6 +33,12 @@ public class TourServiceImpl implements TourService {
 	@Autowired
 	ReserveTouristRopository reserveTouristRepository;
 	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	TourMapper tourMapper;
+	
 	@Override
 	public int insertTour(Tour tour) {
 		tourRepository.save(tour);
@@ -38,8 +47,20 @@ public class TourServiceImpl implements TourService {
 	}
 	
 	@Override
-	public List<Tour> tourInfo() {
+	public List<Tour> tourInfo(Tour tour) {
+		if(tour.getSearchCondition() != null) {
+			 if(tour.getSearchCondition().equals("1")) {
+				return tourMapper.getTourP1(tour.getSearchKeyword());
+			} else if(tour.getSearchCondition().equals("2")) {
+				return tourMapper.getTourP2(tour.getSearchKeyword());
+			} else if(tour.getSearchCondition().equals("3")) {
+				return tourMapper.getTourP3(tour.getSearchKeyword());
+			} else {
+				return null;
+			}
+		} else {
 			return tourRepository.findAll();
+		}
 
 	}
 	
@@ -84,5 +105,10 @@ public class TourServiceImpl implements TourService {
 			reserveTourist.setTouristSeq(reserveTouristRepository.selectNextFileSeqByReserveReserveSeq(reserveTourist.getReserve().getReserveSeq()));
 			reserveTouristRepository.save(reserveTourist);
 		}
+	}
+	
+	@Override
+	public User reservationUserInfo(String userId) {
+		return userRepository.findByUserId(userId);
 	}
 }
