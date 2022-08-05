@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="T_PH_NOTICEFILE")
+@Table(name="T_PH_NOTICE_FILE")
 @Data
 @IdClass(NoticeFileId.class)
 public class NoticeFile {

@@ -13,6 +13,6 @@ import com.spring.phoenix.entitiy.NoticeFileId;
 public interface NoticeFileRepository extends JpaRepository<NoticeFile, NoticeFileId> {
 	List<NoticeFile> findByNotice(Notice notice);
 	
-	@Query(value="select ifnull(max(f.ntfile_seq), 0) + 1 from t_ph_noticefile f where f.notice_seq = :noticeSeq", nativeQuery=true)
+	@Query(value="select ifnull(max(f.ntfile_seq), 0) + 1 from t_ph_notice_file f where f.notice_seq = :noticeSeq", nativeQuery=true)
 	int selectNextFileSeqByNoticeNoticeSeq(@Param("noticeSeq") int noticeSeq);
 }

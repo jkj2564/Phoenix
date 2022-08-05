@@ -25,7 +25,14 @@
 			         $("#noticeTitle").attr("readonly", true);
 			         $("#noticeContent").attr("readonly", true);
 			         $("#noticeRegdate").attr("readonly", true);
-		            }		        
+		            }
+		            
+		            $(".downlink").on("click", function(e) {
+						e.preventDefault();
+						
+						const fileName = $(this).attr("href");
+						window.location = "/notice/fileDown?fileName=" + fileName;
+					});		        
 	           });
 	  	  </script>
 	  	</th:block>	
@@ -81,12 +88,12 @@
 				    <button type="button" class="btn-bd-cont" id="btn3">
 				        <a th:href="@{/notice/deleteNotice/{noticeSeq} (noticeSeq=${notice.noticeSeq})}">삭제</a>
 				    </button>
-				    <button type="button" class="btn-bd-cont" id="btn1">
-					    <div th:if="${noticefileList ne null}" th:each="file : ${fileList}" th:remove="tag">
-					       <a th:id="${file.ntfileSeq}" th:href="${file.ntfileName}" th:text="${file.originalFileName}"></a>
-					    </div>
-				    </button>
-			  </div>
+				    <button type="button" class="btn-bd-cont" id="btn1" 
+				            th:if="${fileList ne null}" th:each="file : ${fileList}" th:remove="tag">
+					    <a class="downlink" th:id="${file.ntfileSeq}" th:href="${file.ntfileName}" th:text="${file.originalFileName}"></a>
+					    			   
+				   </button>				  				    			   
+			   </div> 			     
              </form>
 			  
 			  <ul class="pg-updown">
